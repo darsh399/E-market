@@ -1,0 +1,33 @@
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+  
+  .input-tag {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  
+  .input-field,
+  .textarea-field {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .input-field:focus,
+  .textarea-field:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .textarea-field {
+    resize: vertical;
+    min-height: 80px;
+  }
+  

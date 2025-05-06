@@ -1,0 +1,18 @@
+.search-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cart-text {
+    font-size: 16px;
+    color: #444;
+    margin-right: 5px;
+}
+
+.cart-logo {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    cursor: pointer;
+}

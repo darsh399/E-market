@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../Header/header';
 import Footer from '../Footer/footer';
-
-
+import NavList from '../Header/Navbar/NavList';
+import ItemList from '../Data/ItemList';
 const Page = ({children})=> {
+    const [itemsInCart, setitemsInCart] = useState([]);
+    const removeItemFromCart = (id) => {
+        setitemsInCart((prevData) => prevData.filter((item) => item.id !== id));
+    };
+    
+
+    const addItemInCart = (newData) => {
+       setitemsInCart((prevData) => {
+       const isDuplicate = prevData.some((item)=> item.id === newData.id);
+       return isDuplicate ? prevData : [...prevData, newData];
+    })
+    }
+
     return(
         <div>
-            <Header/>
+            <Header removeItemFromCart={removeItemFromCart}  itemsInCart={itemsInCart.length} addedItemsInCart={itemsInCart}/>
+            <NavList/>
+            <ItemList  addItemInCart={addItemInCart}/>
             <main>{children}</main>
             <Footer/>
         </div>

@@ -1,0 +1,17 @@
+.search-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-text {
+    font-size: 16px;
+    color: #444;
+}
+
+.search-logo {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    cursor: pointer;
+}
