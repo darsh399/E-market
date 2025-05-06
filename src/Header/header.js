@@ -7,19 +7,10 @@ import SearchLogo from './components/SearchLogo';
 import './header.css';
 import Cart from './components/Cart';
 
-const Header = ({ itemsInCart, addedItemsInCart ,removeItemFromCart  }) => {
-    const [input, setInput] = useState('');
+const Header = ({ itemsInCart, addedItemsInCart,inputHandler, input, onClickEventHandler ,removeItemFromCart  }) => {
     const [isCartVisible, setIsCartVisible] = useState(false);
     const [isInputVisible, setIsInputVisible] = useState(false);
 
-    const inputHandler = (data) => {
-        setInput(data);
-    };
-
-    const onClickEventHandler = () => {
-        console.log(addedItemsInCart)
-        setInput('');
-    };
 
     const isVisibleFormHandler = (data) => {
         setIsInputVisible(data);
