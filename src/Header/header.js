@@ -6,8 +6,8 @@ import InputSearch from './components/InputSearch';
 import SearchLogo from './components/SearchLogo';
 import './header.css';
 import Cart from './components/Cart';
-
-const Header = ({ itemsInCart, addedItemsInCart,inputHandler, input, onClickEventHandler ,removeItemFromCart  }) => {
+import NavList from './Navbar/NavList';
+const Header = ({ itemsInCart, addedItemsInCart, inputHandler, input, onClickEventHandler, removeItemFromCart }) => {
     const [isCartVisible, setIsCartVisible] = useState(false);
     const [isInputVisible, setIsInputVisible] = useState(false);
 
@@ -17,33 +17,36 @@ const Header = ({ itemsInCart, addedItemsInCart,inputHandler, input, onClickEven
     }
 
     return (
-        <div className="header-container">
-            <div className="log-container">
-                <Logo img={logoImg} alt="logo" size="60px" />
-                <h1 className="header-title">E-market</h1>
-            </div>
-
-            <div className="icon-group">
-                <CartLogo items={itemsInCart} onClick={() => setIsCartVisible((prev) => !prev)} />
-                <SearchLogo openVisibleForm={isVisibleFormHandler} />
-            </div>
-
-            {isInputVisible && (
-                <InputSearch
-                    closeVisibleForm={isVisibleFormHandler}
-                    onClickEventHandler={onClickEventHandler}
-                    input={input}
-                    inputHandler={inputHandler}
-                />
-            )}
-
-            {isCartVisible && (
-                <div className="header-cart-popup">
-                    <Cart removeItemFromCart={removeItemFromCart }  setIsCartVisible={setIsCartVisible} addedItemsInCart={addedItemsInCart} />
+        <>
+            <div className="header-container">
+                <div className="log-container">
+                    <Logo img={logoImg} alt="logo" size="60px" />
+                    <h1 className="header-title">E-market</h1>
                 </div>
-            )}
 
-        </div>
+                <div className="icon-group">
+                    <CartLogo items={itemsInCart} onClick={() => setIsCartVisible((prev) => !prev)} />
+                    <SearchLogo openVisibleForm={isVisibleFormHandler} />
+                </div>
+
+                {isInputVisible && (
+                    <InputSearch
+                        closeVisibleForm={isVisibleFormHandler}
+                        onClickEventHandler={onClickEventHandler}
+                        input={input}
+                        inputHandler={inputHandler}
+                    />
+                )}
+
+                {isCartVisible && (
+                    <div className="header-cart-popup">
+                        <Cart removeItemFromCart={removeItemFromCart} setIsCartVisible={setIsCartVisible} addedItemsInCart={addedItemsInCart} />
+                    </div>
+                )}
+
+            </div>
+            <NavList />
+        </>
 
     );
 };

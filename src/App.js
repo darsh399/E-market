@@ -7,8 +7,7 @@ function App() {
 
   return (
     <Router>
-      <Page>
-        </Page>
+        <Page/>
     </Router>
   );
 }
