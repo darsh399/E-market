@@ -6,7 +6,7 @@ const NavList = () => {
     <ul>
       <li><Link to="/">Home</Link></li>
       <li><Link to="/mobile">Mobiles</Link></li>
-      <li><Link to="/fridges">Fridges</Link></li>
+      <li><Link to="/refrigerator">Fridges</Link></li>
       <li><Link to="/AC">Ac</Link></li>
     </ul>
   );

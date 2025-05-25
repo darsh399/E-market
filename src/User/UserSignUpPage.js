@@ -22,6 +22,7 @@ const UserSignUpPage = () => {
     const formSubmitHandler = (e) => {
         e.preventDefault();
         console.log(inputFormData);
+        //add logic here to save user data in database
     };
 
     return (
