@@ -1,65 +1,71 @@
-import Input from "../common/Input";
 import React, { useState } from 'react';
+import Input from "../common/Input";
 import Button from "../common/Button";
 import './UserLoginPage.css';
+import axios from 'axios';
 
-const UserLoginPage = (req, res) => {
-    const [showPassword, setShowPassword] = useState(false);
-    const [formData, setFormData] = useState({
-        userEmail: '',
-        userPassword: ''
+const UserLoginPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+
+  const inputHandler = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
     });
+  };
 
-    const inputHandler = (e) => {
-     setFormData({
-        ...formData,
-        [e.target.name]: e.target.value
-     })
+  const passwordToggle = () => {
+    setShowPassword(prev => !prev);
+  };
+
+  const formHandler = async (e) => {
+    e.preventDefault();
+    try {                  
+      const res = await axios.post('http://localhost:5000/api/v1/user/login', formData);
+      console.log('Login successful:', res.data);
+    } catch (error) {
+      console.error('Login failed:', error.response?.data?.message || error.message);
+      alert(error.response?.data?.message || "Login failed");
     }
+  };
 
-    const passwordToggle = () => {
-       setShowPassword((prev) => !prev)
-    }
+  return (
+    <form className="login-container" onSubmit={formHandler}>
+      <h1>Login Page</h1>
 
-    const formHandler = (e) => {
-       e.preventDefault();
-       console.log(formData.userEmail, formData.userPassword)
-    }
-    return (
-        <form className="login-container" onSubmit={formHandler}>
-          <h1>Login Page</h1>
-      
-          <div className="input-field-data">
-            <Input
-              type="input"
-              placeholder="Enter email"
-              name="userEmail"
-              value={formData.userEmail}
-              onChangeInput={inputHandler}
-            />
-          </div>
-      
-          <div className="input-field-data">
-            <Input
-              type="input"
-              placeholder="Enter password"
-              name="userPassword"
-              typeText={showPassword ? 'text' : 'password'}
-              value={formData.userPassword}
-              onChangeInput={inputHandler}
-            />
-          </div>
-      
-          <div className="checkbox-field">
-            <input type="checkbox" onClick={passwordToggle} />
-            <span>Show password</span>
-          </div>
-      
-          <Button type='submit'>LOGIN</Button>
-        </form>
-      );
-      
+      <div className="input-field-data">
+        <Input
+          type="input"
+          placeholder="Enter email"
+          name="email"
+          value={formData.email}
+          onChangeInput={inputHandler}
+        />
+      </div>
 
-}
+      <div className="input-field-data">
+        <Input
+          type="input"
+          placeholder="Enter password"
+          name="password"
+          typeText={showPassword ? 'text' : 'password'}
+          value={formData.password}
+          onChangeInput={inputHandler}
+        />
+      </div>
+
+      <div className="checkbox-field">
+        <input type="checkbox" onClick={passwordToggle} />
+        <span>Show password</span>
+      </div>
+
+      <Button type="submit">LOGIN</Button>
+    </form>
+  );
+};
 
 export default UserLoginPage;

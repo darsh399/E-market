@@ -2,15 +2,17 @@ import './UserSignUpPage.css';
 import Input from '../common/Input';
 import Button from '../common/Button';
 import { useState } from 'react';
+import axios from 'axios';
 
 const UserSignUpPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [inputFormData, setInputFormData] = useState({
-        userName: '',
-        userMobileNo: '',
-        userEmail: '',
-        userPassword: ''
+        name: '',
+        mobileNo: '',
+        email: '',
+        password: ''
     });
+
 
     const inputHandler = (e) => {
         setInputFormData({
@@ -19,10 +21,24 @@ const UserSignUpPage = () => {
         });
     };
 
-    const formSubmitHandler = (e) => {
+    const formSubmitHandler = async (e) => {
         e.preventDefault();
         console.log(inputFormData);
-        //add logic here to save user data in database
+        try {
+            const res = await axios.post('http://localhost:5000/api/v1/user/addUser', inputFormData);
+            console.log(res.data);
+            alert("User registered successfully!");
+            setInputFormData({
+                name: '',
+                mobileNo: '',
+                email: '',
+                password: ''
+            })
+        } catch (error) {
+            console.error(error.response?.data || error.message);
+            alert("Registarction failed", error.response?.data?.message || "Server error")
+        }
+
     };
 
     return (
@@ -31,31 +47,31 @@ const UserSignUpPage = () => {
 
             <Input
                 placeholder="Enter Your Name"
-                value={inputFormData.userName}
+                value={inputFormData.name}
                 type="input"
-                name="userName"
+                name="name"
                 onChangeInput={inputHandler}
             />
             <Input
                 placeholder="Enter Mobile No"
-                value={inputFormData.userMobileNo}
+                value={inputFormData.mobileNo}
                 type="input"
                 typeText='number'
-                name="userMobileNo"
+                name="mobileNo"
                 onChangeInput={inputHandler}
             />
             <Input
                 placeholder="Enter Your Email"
-                value={inputFormData.userEmail}
+                value={inputFormData.email}
                 type="input"
-                name="userEmail"
+                name="email"
                 onChangeInput={inputHandler}
             />
             <Input
                 placeholder="Enter Password"
-                value={inputFormData.userPassword}
+                value={inputFormData.password}
                 type="input"
-                name="userPassword"
+                name="password"
                 typeText={showPassword ? 'text' : 'password'}
                 onChangeInput={inputHandler}
             />

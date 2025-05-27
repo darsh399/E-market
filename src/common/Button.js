@@ -8,7 +8,7 @@ const Button = (props) => {
 
     if (href) {
         return (
-            <a href={href} target='_blank' className={classNames}>
+            <a href={href} target='_blank'  rel="noreferrer" className={classNames}>
                 {children}
             </a>
         );

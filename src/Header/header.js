@@ -4,6 +4,7 @@ import Logo from '../common/Logo';
 import CartLogo from './components/CartLogo';
 import InputSearch from './components/InputSearch';
 import SearchLogo from './components/SearchLogo';
+import ProfileLogo from './components/ProfileLogo';
 import './header.css';
 import Cart from './components/Cart';
 import NavList from './Navbar/NavList';
@@ -19,12 +20,14 @@ const Header = ({ itemsInCart, addedItemsInCart, inputHandler, input, onClickEve
     return (
         <>
             <div className="header-container">
+
                 <div className="log-container">
                     <Logo img={logoImg} alt="logo" size="60px" />
                     <h1 className="header-title">E-market</h1>
                 </div>
 
                 <div className="icon-group">
+                    <ProfileLogo/>
                     <CartLogo items={itemsInCart} onClick={() => setIsCartVisible((prev) => !prev)} />
                     <SearchLogo openVisibleForm={isVisibleFormHandler} />
                 </div>

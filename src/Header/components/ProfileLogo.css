@@ -1,0 +1,17 @@
+.profile-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.profile-text {
+    font-size: 16px;
+    color: #444;
+}
+
+.profile-logo {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    cursor: pointer;
+}
