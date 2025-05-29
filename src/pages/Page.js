@@ -1,51 +1,64 @@
 import React, { useState } from 'react';
 import Header from '../Header/header';
 import Footer from '../Footer/footer';
-import UserSignUpPage from '../User/UserSignUpPage';
-import UserLoginPage from '../User/UserLoginPage';
-import Refrigerator from '../components/NavComponents/Refrigerator';
-import MobileItems from '../components/NavComponents/MobileItems';
-import Home from '../components/NavComponents/Home';
-import AcItems from '../components/NavComponents/AcItems';
-import { Routes, Route } from 'react-router-dom';
+import AppRoutes from '../Routes/AppRoutes';
+
 const Page = () => {
     const [itemsInCart, setitemsInCart] = useState([]);
+    const [isLoggedIn, setIsLoggedIn] = useState(null);
     const [input, setInput] = useState('');
+
     const removeItemFromCart = (id) => {
-        setitemsInCart((prevData) => prevData.filter((item) => item.id !== id));
+        setitemsInCart(prev => prev.filter(item => item.id !== id));
     };
 
     const inputHandler = (data) => {
         setInput(data);
     };
 
+    const loggedInHandler = (data) => {
+        setIsLoggedIn(data);
+    };
+
+    const updateLoggedInUser = (updatesUserData) => {
+        setIsLoggedIn(updatesUserData);
+    }
+
     const onClickEventHandler = () => {
-        console.log(input);
         setInput('');
     };
+
     const addItemInCart = (newData) => {
-        setitemsInCart((prevData) => {
-            const isDuplicate = prevData.some((item) => item.id === newData.id);
-            return isDuplicate ? prevData : [...prevData, newData];
-        })
-    }
+        setitemsInCart(prev => {
+            const isDuplicate = prev.some(item => item.id === newData.id);
+            return isDuplicate ? prev : [...prev, newData];
+        });
+    };
 
     return (
         <div>
-            <Header inputHandler={inputHandler} input={input} onClickEventHandler={onClickEventHandler} removeItemFromCart={removeItemFromCart} itemsInCart={itemsInCart.length} addedItemsInCart={itemsInCart} />
+            <Header
+                inputHandler={inputHandler}
+                input={input}
+                onClickEventHandler={onClickEventHandler}
+                isLoggedIn={isLoggedIn}
+                removeItemFromCart={removeItemFromCart}
+                itemsInCart={itemsInCart.length}
+                addedItemsInCart={itemsInCart}
+            />
+
             <main>
-                <Routes>
-                    <Route path='/' element={<Home addItemInCart={addItemInCart} />} />
-                    <Route path='/mobile' element={<MobileItems addItemInCart={addItemInCart} />} />
-                    <Route path='ac' element={<AcItems addItemInCart={addItemInCart} />} />
-                    <Route path='/refrigerator' element={<Refrigerator addItemInCart={addItemInCart} />} />
-                    <Route path='/userLogin' element={<UserLoginPage/>}></Route>
-                    <Route path='/userSignUp' element={<UserSignUpPage/>}></Route>
-                </Routes>
+                <AppRoutes
+                    addItemInCart={addItemInCart}
+                    loggedInHandler={loggedInHandler}
+                    isLoggedUser = {isLoggedIn}
+                    updateLoggedInUser={updateLoggedInUser}
+                />
             </main>
+
             <Footer />
         </div>
-    )
-}
+    );
+};
 
 export default Page;

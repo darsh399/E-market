@@ -2,13 +2,13 @@ import './Button.css';
 import { Link } from 'react-router-dom';
 
 const Button = (props) => {
-    const { children, onClick, type, href, to, size, style } = props;
+    const { children, onClick, type, href, to, size, style, className } = props;
 
-    const classNames = `button ${size || 'medium'} ${type || 'normal'} ${style || ''}`;
+    const classNames = `button ${size || 'medium'} ${type || 'normal'} ${style || ''} ${className || ''}`;
 
     if (href) {
         return (
-            <a href={href} target='_blank'  rel="noreferrer" className={classNames}>
+            <a href={href} target='_blank' rel="noreferrer" className={classNames}>
                 {children}
             </a>
         );

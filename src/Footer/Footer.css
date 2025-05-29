@@ -1,8 +1,7 @@
 .footer-container {
-  background-color: #999696;
-  padding: 40px 20px;
-  font-family: Arial, sans-serif;
-  color: #f9f5f5;
+  padding: 40px;
+  background-color: #d2d5d8;
+  color: #333;
 }
 
 .footer-top {
@@ -11,8 +10,7 @@
 }
 
 .footer-logo {
-  font-size: 28px;
-  color: #2e7d32;
+  font-size: 24px;
   margin-bottom: 10px;
 }
 
@@ -24,36 +22,22 @@
 }
 
 .footer-links div {
-  min-width: 150px;
+  min-width: 180px;
 }
 
 .footer-links h4 {
   margin-bottom: 10px;
   font-size: 16px;
-  color: #444;
 }
 
-.footer-links ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-links li {
-  margin-bottom: 8px;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.footer-links li:hover {
-  color: #2e7d32;
+.footer-btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .footer-bottom {
   text-align: center;
   font-size: 14px;
-  color: #777;
-}
-
-.footer-links ul{
-    background-color: #999696;
+  color: #666;
 }

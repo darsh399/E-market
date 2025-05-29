@@ -3,8 +3,9 @@ import Input from "../common/Input";
 import Button from "../common/Button";
 import './UserLoginPage.css';
 import axios from 'axios';
-
-const UserLoginPage = () => {
+import { useNavigate } from 'react-router-dom';
+const UserLoginPage = ({loggedInHandler}) => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
@@ -18,6 +19,7 @@ const UserLoginPage = () => {
     });
   };
 
+
   const passwordToggle = () => {
     setShowPassword(prev => !prev);
   };
@@ -26,7 +28,9 @@ const UserLoginPage = () => {
     e.preventDefault();
     try {                  
       const res = await axios.post('http://localhost:5000/api/v1/user/login', formData);
-      console.log('Login successful:', res.data);
+      console.log('Login successful:', res.data.user);
+      navigate('/');
+      loggedInHandler(res.data.user);
     } catch (error) {
       console.error('Login failed:', error.response?.data?.message || error.message);
       alert(error.response?.data?.message || "Login failed");

@@ -1,5 +1,6 @@
 import React from 'react';
 import './Footer.css';
+import Button from '../common/Button';
 
 const Footer = () => {
   return (
@@ -12,27 +13,27 @@ const Footer = () => {
       <div className="footer-links">
         <div>
           <h4>About Us</h4>
-          <ul>
-            <li>Company Info</li>
-            <li>Careers</li>
-            <li>Terms & Conditions</li>
-          </ul>
+          <div className="footer-btn-group">
+            <Button to="/company-info" className="link-button">Company Info</Button>
+            <Button to="/careers" className="link-button">Careers</Button>
+            <Button to="/terms" className="link-button">Terms & Conditions</Button>
+          </div>
         </div>
         <div>
           <h4>Customer Service</h4>
-          <ul>
-            <li>Contact</li>
-            <li>Help Center</li>
-            <li>Returns</li>
-          </ul>
+          <div className="footer-btn-group">
+            <Button to="/contact" className="link-button">Contact</Button>
+            <Button to="/help-center" className="link-button">Help Center</Button>
+            <Button to="/returns" className="link-button">Returns</Button>
+          </div>
         </div>
         <div>
           <h4>Follow Us</h4>
-          <ul>
-            <li>Facebook</li>
-            <li>Instagram</li>
-            <li>Twitter</li>
-          </ul>
+          <div className="footer-btn-group">
+            <Button href="https://facebook.com" className="link-button">Facebook</Button>
+            <Button href="https://instagram.com" className="link-button">Instagram</Button>
+            <Button href="https://twitter.com" className="link-button">Twitter</Button>
+          </div>
         </div>
       </div>
 

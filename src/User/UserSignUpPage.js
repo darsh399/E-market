@@ -3,8 +3,10 @@ import Input from '../common/Input';
 import Button from '../common/Button';
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const UserSignUpPage = () => {
+    const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [inputFormData, setInputFormData] = useState({
         name: '',
@@ -27,13 +29,14 @@ const UserSignUpPage = () => {
         try {
             const res = await axios.post('http://localhost:5000/api/v1/user/addUser', inputFormData);
             console.log(res.data);
-            alert("User registered successfully!");
             setInputFormData({
                 name: '',
                 mobileNo: '',
                 email: '',
                 password: ''
-            })
+            });
+            alert("Signup successful!");
+            navigate('/userLogin');
         } catch (error) {
             console.error(error.response?.data || error.message);
             alert("Registarction failed", error.response?.data?.message || "Server error")

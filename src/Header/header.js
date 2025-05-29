@@ -8,13 +8,19 @@ import ProfileLogo from './components/ProfileLogo';
 import './header.css';
 import Cart from './components/Cart';
 import NavList from './Navbar/NavList';
-const Header = ({ itemsInCart, addedItemsInCart, inputHandler, input, onClickEventHandler, removeItemFromCart }) => {
+import ProfileDropdown from './components/ProfileDropdown';
+
+const Header = ({ itemsInCart, isLoggedIn, addedItemsInCart, inputHandler, input, onClickEventHandler, removeItemFromCart }) => {
     const [isCartVisible, setIsCartVisible] = useState(false);
     const [isInputVisible, setIsInputVisible] = useState(false);
-
+    const [isProfileMenuVisible, setIsProfileMenuVisible] = useState(false);
 
     const isVisibleFormHandler = (data) => {
         setIsInputVisible(data);
+    }
+
+    const profileMenuToggle = () => {
+        setIsProfileMenuVisible((prev) => !prev)
     }
 
     return (
@@ -27,7 +33,11 @@ const Header = ({ itemsInCart, addedItemsInCart, inputHandler, input, onClickEve
                 </div>
 
                 <div className="icon-group">
-                    <ProfileLogo/>
+                    <ProfileLogo isLoggedIn={isLoggedIn} onClick={profileMenuToggle} />
+                    {isProfileMenuVisible && (
+                        <ProfileDropdown isLoggedIn={isLoggedIn} setIsProfileMenuVisible={setIsProfileMenuVisible}/>
+                    )}
+
                     <CartLogo items={itemsInCart} onClick={() => setIsCartVisible((prev) => !prev)} />
                     <SearchLogo openVisibleForm={isVisibleFormHandler} />
                 </div>

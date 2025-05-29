@@ -1,17 +1,17 @@
 .profile-logo-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.profile-text {
-    font-size: 16px;
-    color: #444;
-}
-
-.profile-logo {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .profile-logo {
+    width: 40px;
+    height: 40px;
     cursor: pointer;
-}
+    margin-left: 10px;
+  }
+  
+  .profile-text {
+    font-size: 14px;
+    margin-right: 8px;
+  }
+  
