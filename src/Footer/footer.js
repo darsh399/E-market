@@ -14,7 +14,7 @@ const Footer = () => {
         <div>
           <h4>About Us</h4>
           <div className="footer-btn-group">
-            <Button to="/company-info" className="link-button">Company Info</Button>
+            <Button to="/About" className="link-button">Company Info</Button>
             <Button to="/careers" className="link-button">Careers</Button>
             <Button to="/terms" className="link-button">Terms & Conditions</Button>
           </div>

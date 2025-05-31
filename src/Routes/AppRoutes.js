@@ -8,7 +8,8 @@ import UserLoginPage from '../User/UserLoginPage';
 import UserSignUpPage from '../User/UserSignUpPage';
 import UserUpdatePage from '../User/UserUpdatePage';
 import UserAuthPage from '../User/UserAuthToggle/UserAuthPage';
-
+import AddItem from '../components/Item/AddItem';
+import AboutUs from '../components/NavComponents/About';
 const AppRoutes = ({ addItemInCart, updateLoggedInUser, loggedInHandler, isLoggedUser }) => {
     return (
         <Routes>
@@ -20,6 +21,8 @@ const AppRoutes = ({ addItemInCart, updateLoggedInUser, loggedInHandler, isLogge
             <Route path="/userSignUp" element={<UserSignUpPage />} />
             <Route path="/auth" element={<UserAuthPage loggedInHandler={loggedInHandler} />} />
             <Route path='/userUpdate' element={<UserUpdatePage isLoggedUser={isLoggedUser} updateLoggedInUser={updateLoggedInUser} />} />
+            <Route path='/addItem' element={<AddItem/>}/>
+            <Route path='/About' element={<AboutUs/>}/>
         </Routes>
     );
 };
