@@ -64,9 +64,10 @@ const AddItem = () => {
             <span>Product Category:</span>
             <select name="productCateogery" value={formData.productCateogery} onChange={inputHandler}>
                 <option value="">Select</option>
-                <option value="Ac">Ac</option>
-                <option value="Refrigerator">Refrigerator</option>
+                <option value="air conditioner">Ac</option>
+                <option value="refrigerator">Refrigerator</option>
                 <option value="Tv">Tv</option>
+                <option value="mobile">mobile</option>
             </select>
 
             <Input

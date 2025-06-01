@@ -1,11 +1,10 @@
-import ItemData from "../../Data/ItemData"
 import './AcItems.css';
 import CartForm from "../../Header/components/CartForm"
-const AcItems = ({addItemInCart}) => {
+const AcItems = ({addItemInCart, fetchedItems}) => {
    return(
     <div className="ac-items-container">
         {
-           ItemData.filter((data) => data.productCategory === 'Air Conditioner')
+           fetchedItems.filter((data) => data.productCategory?.toLowerCase() === 'air conditioner')
            .map((data) => {
             return <CartForm key={data.id} item={data} addItemInCart={addItemInCart}/>
            })

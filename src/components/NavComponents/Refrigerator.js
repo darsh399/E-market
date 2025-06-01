@@ -1,11 +1,10 @@
 import './Refrigerator.css';
-import ItemData from '../../Data/ItemData';
 import CartForm from '../../Header/components/CartForm';
-const Refrigerator = ({ addItemInCart }) => {
+const Refrigerator = ({ addItemInCart, fetchedItems }) => {
 return(
     <div className='fridge-items-container'>
              {
-                ItemData.filter((data) => data.productCategory === 'Refrigerator')
+                fetchedItems.filter((data) => data.productCategory?.toLowerCase() === 'refrigerator')
                 .map((data) => {
                     return <CartForm key={data.id} addItemInCart={addItemInCart} item={data}/>
                 })

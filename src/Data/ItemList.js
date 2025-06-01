@@ -1,11 +1,14 @@
 import CartForm from "../Header/components/CartForm";
-import ItemData from "./ItemData";
 
-const ItemList = ({addItemInCart}) => {
+
+const ItemList = ({ addItemInCart, fetchedItems, error }) => {
+ 
+
   return (
     <div className="cart-container">
-      {ItemData.map((item) => (
-        <CartForm item={item} key={item.id} addItemInCart={addItemInCart}/>
+      {error && <p>{error}</p>}
+      {fetchedItems.map((item) => (
+        <CartForm item={item} key={item._id} addItemInCart={addItemInCart} />
       ))}
     </div>
   );

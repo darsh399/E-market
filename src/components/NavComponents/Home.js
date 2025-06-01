@@ -1,9 +1,9 @@
 import React from "react";
 import ItemList from "../../Data/ItemList";
-const Home = ({addItemInCart}) =>{
+const Home = ({addItemInCart, error, fetchedItems}) =>{
     return(
         <div>
-            <ItemList addItemInCart={addItemInCart}/>
+            <ItemList fetchedItems={fetchedItems} error={error} addItemInCart={addItemInCart}/>
         </div>
     )
 }

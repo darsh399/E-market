@@ -9,8 +9,8 @@ const CartForm = ({ item, addItemInCart}) => {
     <div className="cart-card">
       <Logo src={item.imgUrl} alt={item.productName} size="100px" />
       <h3>{item.productName}</h3>
-      <p>{item.productCategory}</p>
-      <p>Rs. {item.price}</p>
+      <p>{item.productCateogery}</p>
+      <p>Rs. {item.productPrice}</p>
 
       <div className='button-container'>
          <Button type='primary'>BUY</Button>
