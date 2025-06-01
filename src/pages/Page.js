@@ -10,20 +10,20 @@ const Page = () => {
     const [input, setInput] = useState('');
     const [fetchedItems, setFetchedItems] = useState([]);
     const [error, setError] = useState(null);
-  
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const res = await axios.get('http://localhost:5000/api/v1/item/allData'); 
-        setFetchedItems(res.data.itemsData);  
-      } catch (err) {
-        setError("Failed to load items");
-        console.error(err);
-      }
-    };
 
+    const fetchItems = async () => {
+        try {
+          const res = await axios.get('http://localhost:5000/api/v1/item/allData'); 
+          setFetchedItems(res.data.itemsData);  
+        } catch (err) {
+          setError("Failed to load items");
+          console.error(err);
+        }
+    }
+  useEffect(() => {
     fetchItems();
   }, []);
+
 
     const removeItemFromCart = (id) => {
         setitemsInCart(prev => prev.filter(item => item._id !== id));
@@ -76,6 +76,7 @@ const Page = () => {
                     fetchedItems={fetchedItems}
                     error={error}
                     updateLoggedInUser={updateLoggedInUser}
+                    fetchItems={fetchItems}
                 />
             </main>
 

@@ -1,91 +1,113 @@
 .about-page {
-    min-height: 100vh;
-    background: linear-gradient(to right, #f2f6f9, #dbe9f4);
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 60px 20px;
-    box-sizing: border-box;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #f9f9ff, #e0f7fa);
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.about-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.about-container:hover {
+  transform: translateY(-5px);
+}
+
+.about-container h1 {
+  font-size: 40px;
+  margin-bottom: 20px;
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: slideInTop 0.6s ease-in-out;
+  text-align: center;
+}
+
+.about-container h2 {
+  margin-top: 40px;
+  font-size: 26px;
+  color: #1a237e;
+  position: relative;
+  padding-left: 16px;
+}
+
+.about-container h2::before {
+  content: "💡";
+  position: absolute;
+  left: 0;
+  top: 1px;
+  font-size: 22px;
+}
+
+.about-container p {
+  font-size: 18px;
+  color: #333;
+  line-height: 1.7;
+  margin-top: 10px;
+  animation: fadeIn 1s ease-in;
+}
+
+.about-container ul {
+  padding-left: 20px;
+  margin-top: 15px;
+}
+
+.about-container ul li {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #555;
+  padding-left: 5px;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.about-container ul li::before {
+  content: "✔️";
+  position: absolute;
+  left: -20px;
+  top: 0;
+  font-size: 14px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInTop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-  
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
   .about-container {
-    width: 100%;
-    background: #ffffff;
-    padding: 50px 70px;
-    border-radius: 20px;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
-    animation: fadeIn 0.7s ease-in-out;
+    padding: 24px;
   }
-  
+
   .about-container h1 {
-    color: #1a73e8;
-    font-size: 42px;
-    margin-bottom: 30px;
-    text-align: center;
+    font-size: 32px;
   }
-  
+
   .about-container h2 {
-    font-size: 28px;
-    margin-top: 40px;
-    margin-bottom: 15px;
-    color: #2c3e50;
-    border-left: 5px solid #1a73e8;
-    padding-left: 15px;
+    font-size: 22px;
   }
-  
-  .about-container p {
-    font-size: 18px;
-    line-height: 1.8;
-    margin-bottom: 20px;
-    color: #4a4a4a;
-  }
-  
-  .about-container ul {
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: 30px;
-  }
-  
+
+  .about-container p,
   .about-container ul li {
-    margin-bottom: 15px;
-    font-size: 17px;
-    padding-left: 25px;
-    position: relative;
-  }
-  
-  .about-container ul li::before {
-    content: "✅";
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: #1a73e8;
     font-size: 16px;
   }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
-  
-  @media (max-width: 768px) {
-    .about-container {
-      padding: 30px 20px;
-    }
-  
-    .about-container h1 {
-      font-size: 32px;
-    }
-  
-    .about-container h2 {
-      font-size: 22px;
-    }
-  
-    .about-container p,
-    .about-container ul li {
-      font-size: 16px;
-    }
-  }
-  
+}

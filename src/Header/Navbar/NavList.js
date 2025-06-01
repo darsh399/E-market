@@ -16,7 +16,7 @@ const NavList = () => {
     <ul className="nav-list">
       <li><Link to="/">Home</Link></li>
       <li><Link to="/About">About Us</Link></li>
-      <li><Link to="/Contact">Contact Us</Link></li>
+      <li><Link to="/contact">Contact Us</Link></li>
       <li>
         <select className="nav-select" onChange={handleSelectChange} defaultValue="">
           <option value="/" >Products</option>

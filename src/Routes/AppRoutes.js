@@ -10,9 +10,9 @@ import UserUpdatePage from '../User/UserUpdatePage';
 import UserAuthPage from '../User/UserAuthToggle/UserAuthPage';
 import AddItem from '../components/Item/AddItem';
 import AboutUs from '../components/NavComponents/About';
+import Contact from '../components/NavComponents/Contact';
 
-
-const AppRoutes = ({error, addItemInCart,fetchedItems, updateLoggedInUser, loggedInHandler, isLoggedUser }) => {
+const AppRoutes = ({error,fetchItems, addItemInCart,fetchedItems, updateLoggedInUser, loggedInHandler, isLoggedUser }) => {
     return (
         <Routes>
             <Route path="/" element={<Home error={error} fetchedItems={fetchedItems} addItemInCart={addItemInCart} />} />
@@ -23,8 +23,9 @@ const AppRoutes = ({error, addItemInCart,fetchedItems, updateLoggedInUser, logge
             <Route path="/userSignUp" element={<UserSignUpPage />} />
             <Route path="/auth" element={<UserAuthPage loggedInHandler={loggedInHandler} />} />
             <Route path='/userUpdate' element={<UserUpdatePage isLoggedUser={isLoggedUser} updateLoggedInUser={updateLoggedInUser} />} />
-            <Route path='/addItem' element={<AddItem/>}/>
+            <Route path='/addItem' element={<AddItem fetchItems={fetchItems}/>}/>
             <Route path='/About' element={<AboutUs/>}/>
+            <Route path='/contact' element={<Contact/>}/>
         </Routes>
     );
 };

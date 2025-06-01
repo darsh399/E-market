@@ -4,7 +4,7 @@ import Button from '../../common/Button';
 import axios from 'axios';
 import './AddItem.css';
 
-const AddItem = () => {
+const AddItem = ({fetchItems}) => {
     const [formData, setFormData] = useState({
         productName: '',
         productCateogery: '',
@@ -44,6 +44,7 @@ const AddItem = () => {
                 productDescription: ''
             });
             alert('Item added successfully..');
+            fetchItems();
             console.log(res);
         } catch (error) {
             console.error(error.response?.data || error.message);

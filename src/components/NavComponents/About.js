@@ -6,7 +6,7 @@ const content = {
           We aim to revolutionize the way people shop for gadgets by providing not just products, 
           but a seamless, reliable, and delightful shopping experience.`,
 
-  offeringsTitle: "Why Choose E-Market?",
+  offeringsTitle: "✨ Why Choose E-Market?",
   offerings: [
     "Extensive product range: Mobiles, Laptops, TVs, Smartwatches, Refrigerators, and more",
     "Competitive prices, seasonal offers, and exclusive online deals",
@@ -15,16 +15,16 @@ const content = {
     "Easy payment options including UPI, COD, and EMI"
   ],
 
-  missionTitle: "Our Mission",
+  missionTitle: "🎯 Our Mission",
   mission: `To empower customers with technology at their fingertips. 
             We are committed to delivering innovation, affordability, and trust 
             in every purchase journey.`,
 
-  visionTitle: "Our Vision",
+  visionTitle: "🔭 Our Vision",
   vision: `To become India's most loved and reliable electronics e-commerce platform, 
            delivering not just products but real value to our customers.`,
 
-  contactTitle: "Get in Touch",
+  contactTitle: "📞 Get in Touch",
   contact: `Have questions, suggestions, or need assistance? 
             Our support team is here to help. Visit our Contact Us page or connect with us 
             via email or phone – we're always ready to listen.`
