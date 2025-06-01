@@ -1,6 +1,7 @@
 import './Cart.css';
 import Button from '../../common/Button';
 const Cart = ({ addedItemsInCart, setIsCartVisible, removeItemFromCart  }) => {
+
     return (
         <div className="cart-container">
             <span className="cart-close" onClick={() => setIsCartVisible(false)}>×</span>
@@ -10,7 +11,7 @@ const Cart = ({ addedItemsInCart, setIsCartVisible, removeItemFromCart  }) => {
             ) : (
                 addedItemsInCart.map((data) => (
                     <div key={data._id} className="cart-item">
-                         <span className='cart-remove-tag' onClick={() => removeItemFromCart(data.id) }>X</span>
+                         <span className='cart-remove-tag' onClick={() => removeItemFromCart(data._id) }>X</span>
                         <img src={data.imgUrl} alt={data.productName} className="cart-item-img" />
                         <div className="cart-item-details">
                             <p>{data.productName}</p>

@@ -9,14 +9,13 @@ const Page = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(null);
     const [input, setInput] = useState('');
     const [fetchedItems, setFetchedItems] = useState([]);
-  const [error, setError] = useState(null);
-
+    const [error, setError] = useState(null);
+  
   useEffect(() => {
     const fetchItems = async () => {
       try {
         const res = await axios.get('http://localhost:5000/api/v1/item/allData'); 
         setFetchedItems(res.data.itemsData);  
-        console.log('allData....', res.data.itemsData);
       } catch (err) {
         setError("Failed to load items");
         console.error(err);
@@ -27,7 +26,7 @@ const Page = () => {
   }, []);
 
     const removeItemFromCart = (id) => {
-        setitemsInCart(prev => prev.filter(item => item.id !== id));
+        setitemsInCart(prev => prev.filter(item => item._id !== id));
     };
 
     const inputHandler = (data) => {
@@ -48,9 +47,13 @@ const Page = () => {
 
     const addItemInCart = (newData) => {
         setitemsInCart(prev => {
-            const isDuplicate = prev.some(item => item.id === newData.id);
+            console.log('in function clicked');
+            console.log('after card',newData)
+            const isDuplicate = prev.some(item => item._id === newData._id);
+            console.log('after card verification',newData)
             return isDuplicate ? prev : [...prev, newData];
         });
+        alert('Item added in cart')
     };
 
     return (

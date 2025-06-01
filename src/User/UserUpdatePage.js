@@ -3,9 +3,13 @@ import './UserUpdatePage.css';
 import Input from '../common/Input';
 import Button from '../common/Button';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 const UserUpdatePage = ({ isLoggedUser, updateLoggedInUser }) => {
     console.log('test  ',isLoggedUser)
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -38,6 +42,8 @@ const UserUpdatePage = ({ isLoggedUser, updateLoggedInUser }) => {
                 formData
             );
             updateLoggedInUser({ ...formData, id: isLoggedUser.id });
+            alert('user updated successfully..');
+            navigate('/');
             console.log('User updated successfully:', res.data);
         } catch (error) {
             console.error('Error updating user:', error.response?.data || error.message);

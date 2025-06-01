@@ -10,6 +10,8 @@ import UserUpdatePage from '../User/UserUpdatePage';
 import UserAuthPage from '../User/UserAuthToggle/UserAuthPage';
 import AddItem from '../components/Item/AddItem';
 import AboutUs from '../components/NavComponents/About';
+
+
 const AppRoutes = ({error, addItemInCart,fetchedItems, updateLoggedInUser, loggedInHandler, isLoggedUser }) => {
     return (
         <Routes>
