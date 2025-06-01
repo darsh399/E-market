@@ -3,6 +3,7 @@ import Header from '../Header/header';
 import Footer from '../Footer/footer';
 import AppRoutes from '../Routes/AppRoutes';
 import axios from 'axios';
+import Notification from '../common/Notification';
 
 const Page = () => {
     const [itemsInCart, setitemsInCart] = useState([]);
@@ -10,7 +11,11 @@ const Page = () => {
     const [input, setInput] = useState('');
     const [fetchedItems, setFetchedItems] = useState([]);
     const [error, setError] = useState(null);
-
+    const [notification, setNotification] = useState({message:'', type:''})
+    
+    const clearNotification = () => {
+        setNotification({message:'', type:''});
+    }
     const fetchItems = async () => {
         try {
           const res = await axios.get('http://localhost:5000/api/v1/item/allData'); 
@@ -45,6 +50,13 @@ const Page = () => {
         setInput('');
     };
 
+    const showNotification = (message, type) => {
+        setNotification({message, type});
+        setTimeout(() => {
+             setNotification({message:'', type:''})
+        }, 3000);
+    }
+
     const addItemInCart = (newData) => {
         setitemsInCart(prev => {
             console.log('in function clicked');
@@ -77,10 +89,12 @@ const Page = () => {
                     error={error}
                     updateLoggedInUser={updateLoggedInUser}
                     fetchItems={fetchItems}
+                    showNotification={showNotification}
                 />
             </main>
 
             <Footer />
+            {notification.message && <Notification clearNotification={clearNotification} message={notification.message} type={notification.type}/>}
         </div>
     );
 };

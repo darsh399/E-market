@@ -3,7 +3,7 @@ import './UserAuthPage.css';
 import UserSignUpPage from '../UserSignUpPage';
 import UserLoginPage from '../UserLoginPage';
 
-const UserAuthPage = ({ loggedInHandler }) => {
+const UserAuthPage = ({showNotification, loggedInHandler }) => {
   const [authMode, setAuthMode] = useState('login'); 
 
   return (
@@ -25,7 +25,7 @@ const UserAuthPage = ({ loggedInHandler }) => {
 
       <div className="auth-form">
         {authMode === 'login' ? (
-          <UserLoginPage loggedInHandler={loggedInHandler} />
+          <UserLoginPage showNotification={showNotification} loggedInHandler={loggedInHandler} />
         ) : (
           <UserSignUpPage />
         )}

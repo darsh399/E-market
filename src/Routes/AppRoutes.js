@@ -12,16 +12,16 @@ import AddItem from '../components/Item/AddItem';
 import AboutUs from '../components/NavComponents/About';
 import Contact from '../components/NavComponents/Contact';
 
-const AppRoutes = ({error,fetchItems, addItemInCart,fetchedItems, updateLoggedInUser, loggedInHandler, isLoggedUser }) => {
+const AppRoutes = ({error, showNotification, fetchItems, addItemInCart,fetchedItems, updateLoggedInUser, loggedInHandler, isLoggedUser }) => {
     return (
         <Routes>
             <Route path="/" element={<Home error={error} fetchedItems={fetchedItems} addItemInCart={addItemInCart} />} />
             <Route path="/mobile" element={<MobileItems fetchedItems={fetchedItems} addItemInCart={addItemInCart} />} />
             <Route path="/ac" element={<AcItems fetchedItems={fetchedItems} addItemInCart={addItemInCart} />} />
             <Route path="/refrigerator" element={<Refrigerator fetchedItems={fetchedItems} addItemInCart={addItemInCart} />} />
-            <Route path="/userLogin" element={<UserLoginPage loggedInHandler={loggedInHandler} />} />
+            <Route path="/userLogin"  element={<UserLoginPage showNotification={showNotification} loggedInHandler={loggedInHandler} />} />
             <Route path="/userSignUp" element={<UserSignUpPage />} />
-            <Route path="/auth" element={<UserAuthPage loggedInHandler={loggedInHandler} />} />
+            <Route path="/auth" element={<UserAuthPage showNotification={showNotification} loggedInHandler={loggedInHandler} />} />
             <Route path='/userUpdate' element={<UserUpdatePage isLoggedUser={isLoggedUser} updateLoggedInUser={updateLoggedInUser} />} />
             <Route path='/addItem' element={<AddItem fetchItems={fetchItems}/>}/>
             <Route path='/About' element={<AboutUs/>}/>

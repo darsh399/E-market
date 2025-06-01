@@ -4,13 +4,15 @@ import Button from "../common/Button";
 import './UserLoginPage.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-const UserLoginPage = ({loggedInHandler}) => {
+
+const UserLoginPage = ({loggedInHandler, showNotification}) => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+
 
   const inputHandler = (e) => {
     setFormData({
@@ -29,15 +31,25 @@ const UserLoginPage = ({loggedInHandler}) => {
     try {                  
       const res = await axios.post('http://localhost:5000/api/v1/user/login', formData);
       console.log('Login successful:', res.data.user);
-      navigate('/');
+      showNotification('user logged successfully..', 'success')
+      
+        navigate('/');
+      
+      setFormData({
+        email: '',
+        password: ''
+      })
+      
+      
       loggedInHandler(res.data.user);
     } catch (error) {
       console.error('Login failed:', error.response?.data?.message || error.message);
-      alert(error.response?.data?.message || "Login failed");
+      showNotification(error.response?.data?.message || "Login failed");
     }
   };
 
   return (
+    <>
     <form className="login-container" onSubmit={formHandler}>
       <h1>Login Page</h1>
 
@@ -69,6 +81,7 @@ const UserLoginPage = ({loggedInHandler}) => {
 
       <Button type="submit">LOGIN</Button>
     </form>
+    </>
   );
 };
 

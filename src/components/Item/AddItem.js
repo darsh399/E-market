@@ -48,7 +48,7 @@ const AddItem = ({fetchItems}) => {
             console.log(res);
         } catch (error) {
             console.error(error.response?.data || error.message);
-            alert("Registration failed", error.response?.data?.message || "Server error");
+            alert("failed to add in cart", error.response?.data?.message || "Server error");
         }
     }
 
