@@ -6,8 +6,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 
-const UserUpdatePage = ({ isLoggedUser, updateLoggedInUser }) => {
-    console.log('test  ',isLoggedUser)
+const UserUpdatePage = ({ isLoggedUser, showNotification, updateLoggedInUser }) => {
+    
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -37,15 +37,16 @@ const UserUpdatePage = ({ isLoggedUser, updateLoggedInUser }) => {
     const formSubmitHandler = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.put(
+            await axios.put(
                 `http://localhost:5000/api/v1/user/users/${isLoggedUser.id}`,
                 formData
             );
             updateLoggedInUser({ ...formData, id: isLoggedUser.id });
-            alert('user updated successfully..');
+            showNotification('User Updated Successfully..', 'success');
             navigate('/');
-            console.log('User updated successfully:', res.data);
+            
         } catch (error) {
+            showNotification('Error in updating' , error.response?.data )
             console.error('Error updating user:', error.response?.data || error.message);
         }
     };

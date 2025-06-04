@@ -1,6 +1,7 @@
 import React from 'react';
 import './Footer.css';
 import Button from '../common/Button';
+import { FaFacebook, FaInstagram, FaTwitter, FaInfoCircle, FaHeadset, FaUndoAlt } from 'react-icons/fa';
 
 const Footer = () => {
   return (
@@ -14,25 +15,27 @@ const Footer = () => {
         <div>
           <h4>About Us</h4>
           <div className="footer-btn-group">
-            <Button to="/About" className="link-button">Company Info</Button>
-            <Button to="/careers" className="link-button">Careers</Button>
-            <Button to="/terms" className="link-button">Terms & Conditions</Button>
+            <Button to="/About" className="link-button"><FaInfoCircle /> Company Info</Button>
+            <Button to="/careers" className="link-button"><FaInfoCircle /> Careers</Button>
+            <Button to="/terms" className="link-button"><FaInfoCircle /> Terms & Conditions</Button>
           </div>
         </div>
+
         <div>
           <h4>Customer Service</h4>
           <div className="footer-btn-group">
-            <Button to="/contact" className="link-button">Contact</Button>
-            <Button to="/help-center" className="link-button">Help Center</Button>
-            <Button to="/returns" className="link-button">Returns</Button>
+            <Button to="/contact" className="link-button"><FaHeadset /> Contact</Button>
+            <Button to="/help-center" className="link-button"><FaHeadset /> Help Center</Button>
+            <Button to="/returns" className="link-button"><FaUndoAlt /> Returns</Button>
           </div>
         </div>
+
         <div>
           <h4>Follow Us</h4>
           <div className="footer-btn-group">
-            <Button href="https://facebook.com" className="link-button">Facebook</Button>
-            <Button href="https://instagram.com" className="link-button">Instagram</Button>
-            <Button href="https://twitter.com" className="link-button">Twitter</Button>
+            <Button href="https://facebook.com" className="link-button"><FaFacebook /> Facebook</Button>
+            <Button href="https://instagram.com" className="link-button"><FaInstagram /> Instagram</Button>
+            <Button href="https://twitter.com" className="link-button"><FaTwitter /> Twitter</Button>
           </div>
         </div>
       </div>

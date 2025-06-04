@@ -27,7 +27,7 @@ const UserAuthPage = ({showNotification, loggedInHandler }) => {
         {authMode === 'login' ? (
           <UserLoginPage showNotification={showNotification} loggedInHandler={loggedInHandler} />
         ) : (
-          <UserSignUpPage />
+          <UserSignUpPage showNotification={showNotification}/>
         )}
       </div>
     </div>

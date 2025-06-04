@@ -5,7 +5,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const UserSignUpPage = () => {
+const UserSignUpPage = ({showNotification}) => {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [inputFormData, setInputFormData] = useState({
@@ -35,7 +35,7 @@ const UserSignUpPage = () => {
                 email: '',
                 password: ''
             });
-            alert("Signup successful!");
+            showNotification('Signup successfully...', 'success');
             navigate('/userLogin');
         } catch (error) {
             console.error(error.response?.data || error.message);

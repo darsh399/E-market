@@ -1,43 +1,79 @@
 .footer-container {
-  padding: 40px;
-  background-color: #d2d5d8;
-  color: #333;
+  padding: 60px 30px;
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+  color: #2c3e50;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .footer-top {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .footer-logo {
-  font-size: 24px;
-  margin-bottom: 10px;
+  font-size: 32px;
+  font-weight: bold;
+  color: #1e90ff;
+  margin-bottom: 8px;
+}
+
+.footer-top p {
+  font-size: 18px;
+  color: #555;
 }
 
 .footer-links {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto 40px;
 }
 
 .footer-links div {
-  min-width: 180px;
+  min-width: 220px;
 }
 
 .footer-links h4 {
-  margin-bottom: 10px;
-  font-size: 16px;
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: #333;
+  border-bottom: 2px solid #1e90ff;
+  display: inline-block;
+  padding-bottom: 6px;
 }
 
 .footer-btn-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
+}
+
+.link-button {
+  all: unset;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #2c3e50;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.link-button:hover {
+  background-color: #1e90ff;
+  color: white;
 }
 
 .footer-bottom {
   text-align: center;
   font-size: 14px;
   color: #666;
+  margin-top: 20px;
+}
+
+.link-button svg {
+  margin-right: 8px;
+  vertical-align: middle;
+  font-size: 1.1em;
 }

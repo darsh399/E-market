@@ -4,12 +4,12 @@ import Button from '../../common/Button';
 import axios from 'axios';
 import './AddItem.css';
 
-const AddItem = ({fetchItems}) => {
+const AddItem = ({ fetchItems }) => {
     const [formData, setFormData] = useState({
         productName: '',
         productCateogery: '',
         productPrice: '',
-        productImage: '',
+        productImage: null,
         productQuantity: '',
         productIsAvailable: '',
         productDescription: ''
@@ -20,40 +20,58 @@ const AddItem = ({fetchItems}) => {
             ...formData,
             [e.target.name]: e.target.value
         });
-    }
+    };
+
+    const fileInputHandler = (e) => {
+        setFormData({
+            ...formData,
+            productImage: e.target.files[0]
+        });
+    };
 
     const formHandler = async (e) => {
         e.preventDefault();
-  console.log(formData)
-        const cleanData = {
-            ...formData,
-            productPrice: Number(formData.productPrice),
-            productQuantity: Number(formData.productQuantity),
-            productIsAvailable: formData.productIsAvailable === 'Yes'
-        };
+
+        const formPayload = new FormData();
+        formPayload.append('productName', formData.productName);
+        formPayload.append('productCateogery', formData.productCateogery);
+        formPayload.append('productPrice', formData.productPrice);
+        formPayload.append('productImage', formData.productImage);
+        formPayload.append('productQuantity', formData.productQuantity);
+        formPayload.append('productIsAvailable', formData.productIsAvailable === 'Yes');
+        formPayload.append('productDescription', formData.productDescription);
 
         try {
-            const res = await axios.post('http://localhost:5000/api/v1/item/addItem', cleanData);
+            const res = await axios.post('http://localhost:5000/api/v1/item/addItem', formPayload, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
             setFormData({
                 productName: '',
                 productCateogery: '',
                 productPrice: '',
-                productImage: '',
+                productImage: null,
                 productQuantity: '',
                 productIsAvailable: '',
                 productDescription: ''
             });
-            alert('Item added successfully..');
+
+            alert('Item added successfully!');
             fetchItems();
             console.log(res);
         } catch (error) {
             console.error(error.response?.data || error.message);
-            alert("failed to add in cart", error.response?.data?.message || "Server error");
+            alert("Failed to add item", error.response?.data?.message || "Server error");
         }
-    }
+    };
 
     return (
         <form className="add-item-form" onSubmit={formHandler}>
+            <h2 className="form-heading">Add New Product</h2>
+
+            <span>Product Name:</span>
             <Input
                 type='input'
                 placeholder='Enter Product Name'
@@ -65,12 +83,13 @@ const AddItem = ({fetchItems}) => {
             <span>Product Category:</span>
             <select name="productCateogery" value={formData.productCateogery} onChange={inputHandler}>
                 <option value="">Select</option>
-                <option value="air conditioner">Ac</option>
+                <option value="air conditioner">AC</option>
                 <option value="refrigerator">Refrigerator</option>
-                <option value="Tv">Tv</option>
-                <option value="mobile">mobile</option>
+                <option value="Tv">TV</option>
+                <option value="mobile">Mobile</option>
             </select>
 
+            <span>Product Price:</span>
             <Input
                 type='input'
                 placeholder='Enter Product Price'
@@ -80,6 +99,7 @@ const AddItem = ({fetchItems}) => {
                 onChangeInput={inputHandler}
             />
 
+            <span>Product Description:</span>
             <Input
                 type='input'
                 placeholder='Enter Product Description'
@@ -88,14 +108,15 @@ const AddItem = ({fetchItems}) => {
                 onChangeInput={inputHandler}
             />
 
-            <Input
-                type='input'
-                placeholder='Enter Product Image'
-                value={formData.productImage}
+            <span>Product Image:</span>
+            <input
+                type='file'
+                accept='image/*'
                 name='productImage'
-                onChangeInput={inputHandler}
+                onChange={fileInputHandler}
             />
 
+            <span>Product Quantity:</span>
             <Input
                 type='input'
                 placeholder='Enter Product Quantity'
@@ -127,7 +148,7 @@ const AddItem = ({fetchItems}) => {
 
             <Button type='submit'>ADD ITEM</Button>
         </form>
-    )
-}
+    );
+};
 
 export default AddItem;

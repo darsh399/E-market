@@ -11,23 +11,23 @@ const Page = () => {
     const [input, setInput] = useState('');
     const [fetchedItems, setFetchedItems] = useState([]);
     const [error, setError] = useState(null);
-    const [notification, setNotification] = useState({message:'', type:''})
-    
+    const [notification, setNotification] = useState({ message: '', type: '' })
+
     const clearNotification = () => {
-        setNotification({message:'', type:''});
+        setNotification({ message: '', type: '' });
     }
     const fetchItems = async () => {
         try {
-          const res = await axios.get('http://localhost:5000/api/v1/item/allData'); 
-          setFetchedItems(res.data.itemsData);  
+            const res = await axios.get('http://localhost:5000/api/v1/item/allData');
+            setFetchedItems(res.data.itemsData);
         } catch (err) {
-          setError("Failed to load items");
-          console.error(err);
+            setError("Failed to load items");
+            console.error(err);
         }
     }
-  useEffect(() => {
-    fetchItems();
-  }, []);
+    useEffect(() => {
+        fetchItems();
+    }, []);
 
 
     const removeItemFromCart = (id) => {
@@ -51,18 +51,15 @@ const Page = () => {
     };
 
     const showNotification = (message, type) => {
-        setNotification({message, type});
+        setNotification({ message, type });
         setTimeout(() => {
-             setNotification({message:'', type:''})
+            setNotification({ message: '', type: '' })
         }, 3000);
     }
 
     const addItemInCart = (newData) => {
         setitemsInCart(prev => {
-            console.log('in function clicked');
-            console.log('after card',newData)
             const isDuplicate = prev.some(item => item._id === newData._id);
-            console.log('after card verification',newData)
             return isDuplicate ? prev : [...prev, newData];
         });
         alert('Item added in cart')
@@ -84,7 +81,7 @@ const Page = () => {
                 <AppRoutes
                     addItemInCart={addItemInCart}
                     loggedInHandler={loggedInHandler}
-                    isLoggedUser = {isLoggedIn}
+                    isLoggedUser={isLoggedIn}
                     fetchedItems={fetchedItems}
                     error={error}
                     updateLoggedInUser={updateLoggedInUser}
@@ -94,7 +91,7 @@ const Page = () => {
             </main>
 
             <Footer />
-            {notification.message && <Notification clearNotification={clearNotification} message={notification.message} type={notification.type}/>}
+            {notification.message && <Notification clearNotification={clearNotification} message={notification.message} type={notification.type} />}
         </div>
     );
 };

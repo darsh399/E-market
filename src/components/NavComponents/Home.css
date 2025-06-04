@@ -1,0 +1,46 @@
+.home-container {
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .hero {
+    padding-top: 900px;
+    background: url('./../../images/banner.jpg') center/cover no-repeat;
+    height: 500px;
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+  }
+  
+  .shop-now-btn {
+    background-color: #ff5722;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+  }
+
+  
+  .footer {
+    background-color: #f5f5f5;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    font-size: 0.9rem;
+    color: #777;
+  }
+  

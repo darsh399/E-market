@@ -20,10 +20,10 @@ const AppRoutes = ({error, showNotification, fetchItems, addItemInCart,fetchedIt
             <Route path="/ac" element={<AcItems fetchedItems={fetchedItems} addItemInCart={addItemInCart} />} />
             <Route path="/refrigerator" element={<Refrigerator fetchedItems={fetchedItems} addItemInCart={addItemInCart} />} />
             <Route path="/userLogin"  element={<UserLoginPage showNotification={showNotification} loggedInHandler={loggedInHandler} />} />
-            <Route path="/userSignUp" element={<UserSignUpPage />} />
+            <Route path="/userSignUp" element={<UserSignUpPage showNotification={showNotification} />} />
             <Route path="/auth" element={<UserAuthPage showNotification={showNotification} loggedInHandler={loggedInHandler} />} />
-            <Route path='/userUpdate' element={<UserUpdatePage isLoggedUser={isLoggedUser} updateLoggedInUser={updateLoggedInUser} />} />
-            <Route path='/addItem' element={<AddItem fetchItems={fetchItems}/>}/>
+            <Route path='/userUpdate' element={<UserUpdatePage showNotification={showNotification} isLoggedUser={isLoggedUser} updateLoggedInUser={updateLoggedInUser} />} />
+            <Route path='/addItem' element={<AddItem showNotification={showNotification} fetchItems={fetchItems}/>}/>
             <Route path='/About' element={<AboutUs/>}/>
             <Route path='/contact' element={<Contact/>}/>
         </Routes>

@@ -31,7 +31,7 @@ const UserLoginPage = ({loggedInHandler, showNotification}) => {
     try {                  
       const res = await axios.post('http://localhost:5000/api/v1/user/login', formData);
       console.log('Login successful:', res.data.user);
-      showNotification('user logged successfully..', 'success')
+      showNotification(`Welcome back ${res.data.user.name}`, 'success')
       
         navigate('/');
       
