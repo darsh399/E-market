@@ -11,8 +11,9 @@ const Cart = ({ addedItemsInCart, setIsCartVisible, removeItemFromCart  }) => {
             ) : (
                 addedItemsInCart.map((data) => (
                     <div key={data._id} className="cart-item">
+                        {console.log(data)}
                          <span className='cart-remove-tag' onClick={() => removeItemFromCart(data._id) }>X</span>
-                        <img src={data.imgUrl} alt={data.productName} className="cart-item-img" />
+                        <img src={`http://localhost:5000/uploads/${data.productImage}`} alt={data.productName} className="cart-item-img" />
                         <div className="cart-item-details">
                             <p>{data.productName}</p>
                             <p>Rs. {data.price}</p>

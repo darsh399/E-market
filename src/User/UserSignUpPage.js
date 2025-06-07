@@ -5,16 +5,16 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const UserSignUpPage = ({showNotification}) => {
+const UserSignUpPage = ({ showNotification }) => {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [inputFormData, setInputFormData] = useState({
         name: '',
         mobileNo: '',
         email: '',
-        password: ''
+        password: '',
+        role: 'user'
     });
-
 
     const inputHandler = (e) => {
         setInputFormData({
@@ -33,7 +33,8 @@ const UserSignUpPage = ({showNotification}) => {
                 name: '',
                 mobileNo: '',
                 email: '',
-                password: ''
+                password: '',
+                role: ''
             });
             showNotification('Signup successfully...', 'success');
             navigate('/userLogin');
@@ -78,6 +79,14 @@ const UserSignUpPage = ({showNotification}) => {
                 typeText={showPassword ? 'text' : 'password'}
                 onChangeInput={inputHandler}
             />
+            
+            <label htmlFor="role">Select Role:</label>
+            <select id="role" name="role" value={inputFormData.role} onChange={inputHandler}>
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+                <option value="vendor">Vendor</option>
+            </select>
+
             <div className="show-password">
                 <input
                     id="show-password-checkbox"
