@@ -10,7 +10,7 @@ import Cart from './components/Cart';
 import NavList from './Navbar/NavList';
 import ProfileDropdown from './components/ProfileDropdown';
 
-const Header = ({ itemsInCart, isLoggedIn, addedItemsInCart, inputHandler, input, onClickEventHandler, removeItemFromCart }) => {
+const Header = ({ itemsInCart, isLoggedIn, setIsLoggedIn, addedItemsInCart, inputHandler, input, onClickEventHandler, removeItemFromCart, showNotification }) => {
     const [isCartVisible, setIsCartVisible] = useState(false);
     const [isInputVisible, setIsInputVisible] = useState(false);
     const [isProfileMenuVisible, setIsProfileMenuVisible] = useState(false);
@@ -35,7 +35,13 @@ const Header = ({ itemsInCart, isLoggedIn, addedItemsInCart, inputHandler, input
                 <div className="icon-group">
                     <ProfileLogo isLoggedIn={isLoggedIn} onClick={profileMenuToggle} />
                     {isProfileMenuVisible && (
-                        <ProfileDropdown isLoggedIn={isLoggedIn} setIsProfileMenuVisible={setIsProfileMenuVisible}/>
+                        <ProfileDropdown
+                            isLoggedIn={isLoggedIn}
+                            setIsProfileMenuVisible={setIsProfileMenuVisible}
+                            setIsLoggedIn={setIsLoggedIn}
+                            showNotification={showNotification}
+                        />
+
                     )}
 
                     <CartLogo items={itemsInCart} onClick={() => setIsCartVisible((prev) => !prev)} />

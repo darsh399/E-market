@@ -38,9 +38,25 @@ const Page = () => {
         setInput(data);
     };
 
+    useEffect(() => {
+        const checkLoginStatus = async () => {
+            try {
+                const res = await axios.get('http://localhost:5000/api/v1/user/profile', {
+                    withCredentials: true
+                });
+                setIsLoggedIn(res.data.user);
+            } catch (err) {
+                console.log("Not logged in:", err.response?.data?.message || err.message);
+            }
+        };
+
+        checkLoginStatus();
+    }, []);
+
     const loggedInHandler = (data) => {
         setIsLoggedIn(data);
     };
+
 
     const updateLoggedInUser = (updatesUserData) => {
         setIsLoggedIn(updatesUserData);
@@ -72,9 +88,11 @@ const Page = () => {
                 input={input}
                 onClickEventHandler={onClickEventHandler}
                 isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
                 removeItemFromCart={removeItemFromCart}
                 itemsInCart={itemsInCart.length}
                 addedItemsInCart={itemsInCart}
+                showNotification={showNotification}
             />
 
             <main>
