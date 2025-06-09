@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import logoImg from './../images/logoImg.jpg';
 import Logo from '../common/Logo';
 import CartLogo from './components/CartLogo';
@@ -9,19 +9,13 @@ import './header.css';
 import Cart from './components/Cart';
 import NavList from './Navbar/NavList';
 import ProfileDropdown from './components/ProfileDropdown';
+import { useUiContext } from '../Context/UiProvider';
 
 const Header = ({ itemsInCart, isLoggedIn, setIsLoggedIn, addedItemsInCart, inputHandler, input, onClickEventHandler, removeItemFromCart, showNotification }) => {
-    const [isCartVisible, setIsCartVisible] = useState(false);
-    const [isInputVisible, setIsInputVisible] = useState(false);
-    const [isProfileMenuVisible, setIsProfileMenuVisible] = useState(false);
+    const{isInputVisible,isCartVisible, isProfileMenuVisible} = useUiContext();
+   
 
-    const isVisibleFormHandler = (data) => {
-        setIsInputVisible(data);
-    }
 
-    const profileMenuToggle = () => {
-        setIsProfileMenuVisible((prev) => !prev)
-    }
 
     return (
         <>
@@ -33,24 +27,23 @@ const Header = ({ itemsInCart, isLoggedIn, setIsLoggedIn, addedItemsInCart, inpu
                 </div>
 
                 <div className="icon-group">
-                    <ProfileLogo isLoggedIn={isLoggedIn} onClick={profileMenuToggle} />
+                    <ProfileLogo isLoggedIn={isLoggedIn} />
                     {isProfileMenuVisible && (
                         <ProfileDropdown
                             isLoggedIn={isLoggedIn}
-                            setIsProfileMenuVisible={setIsProfileMenuVisible}
                             setIsLoggedIn={setIsLoggedIn}
                             showNotification={showNotification}
                         />
 
                     )}
 
-                    <CartLogo items={itemsInCart} onClick={() => setIsCartVisible((prev) => !prev)} />
-                    <SearchLogo openVisibleForm={isVisibleFormHandler} />
+                    <CartLogo items={itemsInCart}/>
+                    <SearchLogo/>
                 </div>
 
                 {isInputVisible && (
                     <InputSearch
-                        closeVisibleForm={isVisibleFormHandler}
+                       
                         onClickEventHandler={onClickEventHandler}
                         input={input}
                         inputHandler={inputHandler}
@@ -59,7 +52,7 @@ const Header = ({ itemsInCart, isLoggedIn, setIsLoggedIn, addedItemsInCart, inpu
 
                 {isCartVisible && (
                     <div className="header-cart-popup">
-                        <Cart removeItemFromCart={removeItemFromCart} setIsCartVisible={setIsCartVisible} addedItemsInCart={addedItemsInCart} />
+                        <Cart removeItemFromCart={removeItemFromCart} addedItemsInCart={addedItemsInCart} />
                     </div>
                 )}
 

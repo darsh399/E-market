@@ -1,8 +1,9 @@
 import './ProfileDropdown.css';
 import Button from '../../common/Button';
 import axios from 'axios';
-
-const ProfileDropdown = ({ setIsProfileMenuVisible, isLoggedIn, setIsLoggedIn, showNotification }) => {
+import { useUiContext } from '../../Context/UiProvider';
+const ProfileDropdown = ({ isLoggedIn, setIsLoggedIn, showNotification }) => {
+    const {toggleProfileMenuVisibility} = useUiContext();
     const handleLogout = async () => {
         try {
             await axios.post('http://localhost:5000/api/v1/user/logout', {}, {
@@ -11,7 +12,7 @@ const ProfileDropdown = ({ setIsProfileMenuVisible, isLoggedIn, setIsLoggedIn, s
 
             setIsLoggedIn(null);
             showNotification('Logged out successfully', 'success');
-            setIsProfileMenuVisible(false);
+            toggleProfileMenuVisibility(false);
 
         } catch (error) {
             console.error('Logout failed:', error);
@@ -23,7 +24,7 @@ const ProfileDropdown = ({ setIsProfileMenuVisible, isLoggedIn, setIsLoggedIn, s
         <div className="profile-dropdown">
             {isLoggedIn ? (
                 <>
-                    <Button className="close-button" onClick={() => setIsProfileMenuVisible(false)}>X</Button>
+                    <Button className="close-button" onClick={() => toggleProfileMenuVisibility(false)}>X</Button>
                     <Button className="link-button">Profile</Button>
                     <Button className="link-button" to='/userUpdate'>Update Profile</Button>
                     <Button className="link-button">Previous Orders</Button>
@@ -31,7 +32,7 @@ const ProfileDropdown = ({ setIsProfileMenuVisible, isLoggedIn, setIsLoggedIn, s
                 </>
             ) : (
                 <>
-                    <Button className="close-button" onClick={() => setIsProfileMenuVisible(false)}>X</Button>
+                    <Button className="close-button" onClick={() => toggleProfileMenuVisibility(false)}>X</Button>
                     <Button className="link-button" to='/auth'>Login</Button>
                 </>
             )}

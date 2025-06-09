@@ -1,10 +1,11 @@
 import './Cart.css';
 import Button from '../../common/Button';
-const Cart = ({ addedItemsInCart, setIsCartVisible, removeItemFromCart  }) => {
-
+import { useUiContext } from '../../Context/UiProvider';
+const Cart = ({ addedItemsInCart, removeItemFromCart  }) => {
+    const {toggleCartVisibility} = useUiContext();
     return (
         <div className="cart-container">
-            <span className="cart-close" onClick={() => setIsCartVisible(false)}>×</span>
+            <span className="cart-close" onClick={() => toggleCartVisibility(false)}>×</span>
             <h3>Items added in cart</h3>
             {addedItemsInCart.length === 0 ? (
                 <p>No items in cart</p>
