@@ -1,7 +1,7 @@
 import searchLogo from './../../images/search.svg';
 import './SearchLogo.css';
 import { useUiContext } from '../../Context/UiProvider';
-const SearchLogo = ({openVisibleForm}) => {
+const SearchLogo = () => {
   const {toggleInputVisibility} = useUiContext();
     return(
         <div className="search-logo-container">

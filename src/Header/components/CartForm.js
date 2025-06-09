@@ -1,8 +1,9 @@
 import './CartForm.css';
 import Logo from '../../common/Logo';
 import Button from '../../common/Button';
-
-const CartForm = ({ item, addItemInCart }) => {
+import { useGlobalUiContext } from '../../Context/GlobalUiContextProvider';
+const CartForm = ({ item }) => {
+  const {addItemInCart} = useGlobalUiContext();
   const addItemInCarts = (item) => {
     addItemInCart(item);
   };

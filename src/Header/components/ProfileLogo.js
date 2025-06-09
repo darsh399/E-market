@@ -2,7 +2,9 @@ import React from 'react';
 import profileLogo from './../../images/profileLogo.png';
 import './ProfileLogo.css';
 import { useUiContext } from '../../Context/UiProvider';
-const ProfileLogo = ({ isLoggedIn }) => {
+import { useGlobalUiContext } from '../../Context/GlobalUiContextProvider';
+const ProfileLogo = () => {
+    const {isLoggedIn} = useGlobalUiContext();
     const {toggleProfileMenuVisibility} = useUiContext();
     return (
         <div className="profile-logo-container">

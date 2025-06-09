@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import './UserAuthPage.css';
 import UserSignUpPage from '../UserSignUpPage';
 import UserLoginPage from '../UserLoginPage';
-
-const UserAuthPage = ({showNotification, loggedInHandler }) => {
+import { useGlobalUiContext } from '../../Context/GlobalUiContextProvider';
+const UserAuthPage = () => {
+  const {showNotification, loggedInHandler} = useGlobalUiContext();
   const [authMode, setAuthMode] = useState('login'); 
 
   return (

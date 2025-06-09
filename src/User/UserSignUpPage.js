@@ -4,8 +4,9 @@ import Button from '../common/Button';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
-const UserSignUpPage = ({ showNotification }) => {
+import { useGlobalUiContext } from '../Context/GlobalUiContextProvider';
+const UserSignUpPage = () => {
+    const {showNotification} = useGlobalUiContext();
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [inputFormData, setInputFormData] = useState({

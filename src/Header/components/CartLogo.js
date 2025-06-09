@@ -1,7 +1,9 @@
 import './CartLogo.css'
 import cart from './../../images/cart.jpg';
+import { useGlobalUiContext } from '../../Context/GlobalUiContextProvider';
 import { useUiContext } from '../../Context/UiProvider';
-const CartLogo = ({ items }) => {
+const CartLogo = () => {
+    const {items} = useGlobalUiContext();
     const {toggleCartVisibility} = useUiContext();
     return (
         <div className="search-icon" onClick={toggleCartVisibility}>

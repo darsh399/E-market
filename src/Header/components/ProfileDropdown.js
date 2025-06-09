@@ -2,8 +2,10 @@ import './ProfileDropdown.css';
 import Button from '../../common/Button';
 import axios from 'axios';
 import { useUiContext } from '../../Context/UiProvider';
-const ProfileDropdown = ({ isLoggedIn, setIsLoggedIn, showNotification }) => {
+import { useGlobalUiContext } from '../../Context/GlobalUiContextProvider';
+const ProfileDropdown = () => {
     const {toggleProfileMenuVisibility} = useUiContext();
+    const {isLoggedIn, setIsLoggedIn, showNotification} = useGlobalUiContext();
     const handleLogout = async () => {
         try {
             await axios.post('http://localhost:5000/api/v1/user/logout', {}, {

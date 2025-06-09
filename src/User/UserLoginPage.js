@@ -4,8 +4,9 @@ import Button from "../common/Button";
 import './UserLoginPage.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
-const UserLoginPage = ({ loggedInHandler, showNotification }) => {
+import { useGlobalUiContext } from '../Context/GlobalUiContextProvider';
+const UserLoginPage = () => {
+  const {loggedInHandler, showNotification} = useGlobalUiContext();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({

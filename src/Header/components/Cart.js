@@ -1,16 +1,18 @@
 import './Cart.css';
 import Button from '../../common/Button';
 import { useUiContext } from '../../Context/UiProvider';
-const Cart = ({ addedItemsInCart, removeItemFromCart  }) => {
+import { useGlobalUiContext } from '../../Context/GlobalUiContextProvider';
+const Cart = () => {
+    const {itemsInCart, removeItemFromCart} = useGlobalUiContext();
     const {toggleCartVisibility} = useUiContext();
     return (
         <div className="cart-container">
             <span className="cart-close" onClick={() => toggleCartVisibility(false)}>×</span>
             <h3>Items added in cart</h3>
-            {addedItemsInCart.length === 0 ? (
+            {itemsInCart.length === 0 ? (
                 <p>No items in cart</p>
             ) : (
-                addedItemsInCart.map((data) => (
+                itemsInCart.map((data) => (
                     <div key={data._id} className="cart-item">
                         {console.log(data)}
                          <span className='cart-remove-tag' onClick={() => removeItemFromCart(data._id) }>X</span>

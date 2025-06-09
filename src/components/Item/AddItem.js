@@ -3,8 +3,9 @@ import Input from "../../common/Input";
 import Button from '../../common/Button';
 import axios from 'axios';
 import './AddItem.css';
-
-const AddItem = ({ fetchItems }) => {
+import { useGlobalUiContext } from '../../Context/GlobalUiContextProvider';
+const AddItem = () => {
+  const {fetchItems, showNotification} = useGlobalUiContext();
   const [formData, setFormData] = useState({
     productName: '',
     productCateogery: '',
@@ -63,7 +64,7 @@ const AddItem = ({ fetchItems }) => {
         productDescription: ''
       });
 
-      alert('Item added successfully!');
+      showNotification('Item added successfully!', 'success');
       fetchItems();
       console.log(res);
     } catch (error) {

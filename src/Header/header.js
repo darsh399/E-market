@@ -11,11 +11,8 @@ import NavList from './Navbar/NavList';
 import ProfileDropdown from './components/ProfileDropdown';
 import { useUiContext } from '../Context/UiProvider';
 
-const Header = ({ itemsInCart, isLoggedIn, setIsLoggedIn, addedItemsInCart, inputHandler, input, onClickEventHandler, removeItemFromCart, showNotification }) => {
-    const{isInputVisible,isCartVisible, isProfileMenuVisible} = useUiContext();
-   
-
-
+const Header = () => {
+    const { isInputVisible, isCartVisible, isProfileMenuVisible } = useUiContext();
 
     return (
         <>
@@ -27,32 +24,23 @@ const Header = ({ itemsInCart, isLoggedIn, setIsLoggedIn, addedItemsInCart, inpu
                 </div>
 
                 <div className="icon-group">
-                    <ProfileLogo isLoggedIn={isLoggedIn} />
+                    <ProfileLogo />
                     {isProfileMenuVisible && (
                         <ProfileDropdown
-                            isLoggedIn={isLoggedIn}
-                            setIsLoggedIn={setIsLoggedIn}
-                            showNotification={showNotification}
                         />
-
                     )}
 
-                    <CartLogo items={itemsInCart}/>
-                    <SearchLogo/>
+                    <CartLogo />
+                    <SearchLogo />
                 </div>
 
                 {isInputVisible && (
-                    <InputSearch
-                       
-                        onClickEventHandler={onClickEventHandler}
-                        input={input}
-                        inputHandler={inputHandler}
-                    />
+                    <InputSearch />
                 )}
 
                 {isCartVisible && (
                     <div className="header-cart-popup">
-                        <Cart removeItemFromCart={removeItemFromCart} addedItemsInCart={addedItemsInCart} />
+                        <Cart />
                     </div>
                 )}
 

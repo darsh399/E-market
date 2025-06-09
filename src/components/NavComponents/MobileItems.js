@@ -1,7 +1,9 @@
 import './MobileItems.css';
 import CartForm from "../../Header/components/CartForm";
-
-const MobileItems = ({ addItemInCart, fetchedItems }) => {
+ import { useGlobalUiContext } from '../../Context/GlobalUiContextProvider';
+ 
+const MobileItems = () => {
+    const {fetchedItems} = useGlobalUiContext();
     return (
         <div className="mobile-items-container">
             {
@@ -9,7 +11,7 @@ const MobileItems = ({ addItemInCart, fetchedItems }) => {
                     .filter((data) => data.productCateogery
                     ?.toLowerCase() === "mobile")
                     .map((data) => (
-                        <CartForm addItemInCart={addItemInCart} key={data._id} item={data} />
+                        <CartForm key={data._id} item={data} />
                     ))
             }
         </div>

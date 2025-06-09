@@ -1,8 +1,9 @@
 import React from "react";
 import ItemList from "../../Data/ItemList";
 import "./Home.css";
-
-const Home = ({ addItemInCart, error, fetchedItems }) => {
+import { useGlobalUiContext } from "../../Context/GlobalUiContextProvider";
+const Home = () => {
+  const {error, addItemInCart, fetchedItems} = useGlobalUiContext();
   return (
     <div className="home-container">
       <section className="hero">

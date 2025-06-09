@@ -2,8 +2,10 @@ import './Input.css'
 import Input from '../../common/Input';
 import Button from '../../common/Button';
 import { useUiContext } from '../../Context/UiProvider';
-const InputSearch = ({input, inputHandler, onClickEventHandler, closeVisibleForm}) => {
+import { useGlobalUiContext } from '../../Context/GlobalUiContextProvider';
+const InputSearch = () => {
     const {toggleInputVisibility} = useUiContext();
+    const {input, inputHandler, onClickEventHandler} = useGlobalUiContext();
     return(
         <div className="header-search-popup">
         <div className="header-search-popup-searchdiv">

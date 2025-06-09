@@ -18,7 +18,6 @@ export const UiProvider = ({ children }) => {
   };
 
   const toggleProfileMenuVisibility = () => {
-    console.log('hii')
     setIsProfileMenuVisible(prev => !prev);
   };
 

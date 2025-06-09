@@ -1,113 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Header from '../Header/header';
 import Footer from '../Footer/footer';
 import AppRoutes from '../Routes/AppRoutes';
-import axios from 'axios';
 import Notification from '../common/Notification';
-
+import { useGlobalUiContext } from '../Context/GlobalUiContextProvider';
 const Page = () => {
-    const [itemsInCart, setitemsInCart] = useState([]);
-    const [isLoggedIn, setIsLoggedIn] = useState(null);
-    const [input, setInput] = useState('');
-    const [fetchedItems, setFetchedItems] = useState([]);
-    const [error, setError] = useState(null);
-    const [notification, setNotification] = useState({ message: '', type: '' })
-
-    const clearNotification = () => {
-        setNotification({ message: '', type: '' });
-    }
-    const fetchItems = async () => {
-        try {
-            const res = await axios.get('http://localhost:5000/api/v1/item/allData');
-            setFetchedItems(res.data.itemsData);
-        } catch (err) {
-            setError("Failed to load items");
-            console.error(err);
-        }
-    }
-    useEffect(() => {
-        fetchItems();
-    }, []);
-
-
-    const removeItemFromCart = (id) => {
-        setitemsInCart(prev => prev.filter(item => item._id !== id));
-    };
-
-    const inputHandler = (data) => {
-        setInput(data);
-    };
-
-    useEffect(() => {
-        const checkLoginStatus = async () => {
-            try {
-                const res = await axios.get('http://localhost:5000/api/v1/user/profile', {
-                    withCredentials: true
-                });
-                setIsLoggedIn(res.data.user);
-            } catch (err) {
-                console.log("Not logged in:", err.response?.data?.message || err.message);
-            }
-        };
-
-        checkLoginStatus();
-    }, []);
-
-    const loggedInHandler = (data) => {
-        setIsLoggedIn(data);
-    };
-
-
-    const updateLoggedInUser = (updatesUserData) => {
-        setIsLoggedIn(updatesUserData);
-    }
-
-    const onClickEventHandler = () => {
-        setInput('');
-    };
-
-    const showNotification = (message, type) => {
-        setNotification({ message, type });
-        setTimeout(() => {
-            setNotification({ message: '', type: '' })
-        }, 3000);
-    }
-
-    const addItemInCart = (newData) => {
-        setitemsInCart(prev => {
-            const isDuplicate = prev.some(item => item._id === newData._id);
-            return isDuplicate ? prev : [...prev, newData];
-        });
-        alert('Item added in cart')
-    };
-
+    const {notification, clearNotification} = useGlobalUiContext();
     return (
         <div>
-            <Header
-                inputHandler={inputHandler}
-                input={input}
-                onClickEventHandler={onClickEventHandler}
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-                removeItemFromCart={removeItemFromCart}
-                itemsInCart={itemsInCart.length}
-                addedItemsInCart={itemsInCart}
-                showNotification={showNotification}
-            />
-
+            <Header />
             <main>
-                <AppRoutes
-                    addItemInCart={addItemInCart}
-                    loggedInHandler={loggedInHandler}
-                    isLoggedUser={isLoggedIn}
-                    fetchedItems={fetchedItems}
-                    error={error}
-                    updateLoggedInUser={updateLoggedInUser}
-                    fetchItems={fetchItems}
-                    showNotification={showNotification}
-                />
+                <AppRoutes />
             </main>
-
             <Footer />
             {notification.message && <Notification clearNotification={clearNotification} message={notification.message} type={notification.type} />}
         </div>

@@ -4,10 +4,10 @@ import Input from '../common/Input';
 import Button from '../common/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useGlobalUiContext } from '../Context/GlobalUiContextProvider';
 
-
-const UserUpdatePage = ({ isLoggedUser, showNotification, updateLoggedInUser }) => {
-    
+const UserUpdatePage = () => {
+    const {isLoggedIn, showNotification, updateLoggedInUser} = useGlobalUiContext();
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -17,14 +17,14 @@ const UserUpdatePage = ({ isLoggedUser, showNotification, updateLoggedInUser }) 
     });
 
     useEffect(() => {
-        if (isLoggedUser) {
+        if (isLoggedIn) {
             setFormData({
-                name: isLoggedUser.name || '',
-                email: isLoggedUser.email || '',
-                mobileNo: isLoggedUser.mobileNo || '',
+                name: isLoggedIn.name || '',
+                email: isLoggedIn.email || '',
+                mobileNo: isLoggedIn.mobileNo || '',
             });
         }
-    }, [isLoggedUser]);
+    }, [isLoggedIn]);
 
     const onChangeInputHandler = (e) => {
         const { name, value } = e.target;
@@ -38,10 +38,10 @@ const UserUpdatePage = ({ isLoggedUser, showNotification, updateLoggedInUser }) 
         e.preventDefault();
         try {
             await axios.put(
-                `http://localhost:5000/api/v1/user/users/${isLoggedUser.id}`,
+                `http://localhost:5000/api/v1/user/users/${isLoggedIn.id}`,
                 formData
             );
-            updateLoggedInUser({ ...formData, id: isLoggedUser.id });
+            updateLoggedInUser({ ...formData, id: isLoggedIn.id });
             showNotification('User Updated Successfully..', 'success');
             navigate('/');
             
