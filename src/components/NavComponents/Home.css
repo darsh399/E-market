@@ -1,9 +1,11 @@
 .home-container {
   font-family: 'Segoe UI', sans-serif;
+  background: #f9fafb;
+  min-height: 100vh;
 }
 
 .hero {
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+  background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
               url('./../../images/banner.jpg') center/cover no-repeat;
   height: 550px;
   color: white;
@@ -12,32 +14,49 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+  animation: bgZoom 30s ease-in-out infinite alternate;
+}
+
+@keyframes bgZoom {
+  0% {background-size: 105%;}
+  100% {background-size: 110%;}
 }
 
 .hero h1 {
-  font-size: 3rem;
-  font-weight: 800;
+  font-size: 3.6rem;
+  font-weight: 900;
   margin-bottom: 16px;
+  text-shadow: 0 4px 8px rgba(0,0,0,0.6);
+  letter-spacing: 2px;
+  animation: fadeSlideDown 1s ease forwards;
 }
 
 .hero p {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  animation: fadeSlideUp 1.5s ease forwards;
 }
 
 .shop-now-btn {
   background-color: #ff5722;
   color: white;
-  padding: 14px 30px;
-  font-size: 1.1rem;
+  padding: 16px 36px;
+  font-size: 1.3rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 50px;
   margin-top: 25px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  box-shadow: 0 6px 12px rgba(255, 87, 34, 0.5);
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .shop-now-btn:hover {
   background-color: #e64a19;
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(230, 74, 25, 0.7);
 }
 
 .features {
@@ -45,101 +64,198 @@
   justify-content: center;
   gap: 40px;
   padding: 60px 40px;
-  background-color: #f8f9fa;
+  background-color: #ffffff;
   text-align: center;
   flex-wrap: wrap;
 }
 
 .feature-card {
   background: white;
-  padding: 30px 24px;
-  border-radius: 18px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
-  max-width: 300px;
+  padding: 36px 28px;
+  border-radius: 20px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.07);
+  max-width: 320px;
   flex: 1;
-  transition: all 0.4s ease;
-  transform: translateY(0px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  border: 1px solid #e0e0e0;
+  border: 3px solid transparent;
 }
 
 .feature-card::before {
   content: "";
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at center, #0072ff22, transparent 70%);
+  top: -60%;
+  left: -60%;
+  width: 220%;
+  height: 220%;
+  background: radial-gradient(circle at center, #0072ff44, transparent 70%);
   transform: rotate(25deg);
   opacity: 0.3;
   z-index: 0;
+  transition: opacity 0.4s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.15);
+  border-image-slice: 1;
+  border-width: 3px;
+  border-style: solid;
+  border-image-source: linear-gradient(45deg, #0072ff, #00c6ff);
+}
+
+.feature-card:hover::before {
+  opacity: 0.5;
 }
 
 .feature-card h3,
 .feature-card p {
   position: relative;
   z-index: 1;
-}
-
-.feature-card:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
-  border-color: #d0d0d0;
+  color: #222;
+  font-weight: 600;
 }
 
 .testimonials {
-  padding: 60px 40px;
-  background: #ffffff;
+  padding: 80px 40px;
+  background: linear-gradient(135deg, #e0f7ff 0%, #ffffff 100%);
   text-align: center;
+  color: #1e293b;
 }
 
 .testimonials h2 {
-  font-size: 2rem;
-  margin-bottom: 40px;
-  color: #2c3e50;
+  font-size: 2.6rem;
+  margin-bottom: 50px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: #0072ff;
+  animation: fadeIn 1s ease forwards;
 }
 
 .testimonial-card {
-  background-color: #f1f3f6;
-  padding: 24px;
-  border-radius: 12px;
+  background-color: #dbeafe;
+  padding: 32px 30px;
+  border-radius: 16px;
   margin: 20px auto;
-  max-width: 500px;
+  max-width: 520px;
   font-style: italic;
+  font-weight: 500;
+  box-shadow: 0 15px 40px rgba(0, 114, 255, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-8px);
 }
 
 .newsletter {
-  padding: 60px 20px;
+  padding: 80px 20px;
   background: linear-gradient(to right, #0072ff, #00c6ff);
   text-align: center;
   color: white;
+  border-radius: 0 0 40px 40px;
 }
 
 .newsletter h2 {
-  font-size: 2rem;
+  font-size: 2.4rem;
   margin-bottom: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+
+.newsletter p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  font-weight: 400;
 }
 
 .newsletter input {
-  padding: 12px;
+  padding: 14px 18px;
   border: none;
-  border-radius: 8px;
-  width: 250px;
-  margin: 10px;
+  border-radius: 12px;
+  width: 280px;
+  max-width: 90vw;
+  margin-right: 12px;
+  font-size: 1.1rem;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 0.3s ease;
+}
+
+.newsletter input:focus {
+  outline: none;
+  box-shadow: 0 6px 15px rgba(0, 198, 255, 0.8);
 }
 
 .newsletter button {
-  padding: 12px 20px;
+  padding: 14px 28px;
   background-color: white;
   color: #0072ff;
   border: none;
-  border-radius: 8px;
-  font-weight: bold;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.1rem;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 6px 15px rgba(0, 114, 255, 0.4);
 }
 
 .newsletter button:hover {
   background-color: #eaeaea;
+  color: #0059b3;
+}
+
+@keyframes fadeSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  .hero p {
+    font-size: 1.1rem;
+  }
+  .features {
+    gap: 24px;
+    padding: 40px 20px;
+  }
+  .feature-card {
+    max-width: 100%;
+  }
+  .newsletter input {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  .newsletter button {
+    width: 100%;
+  }
 }

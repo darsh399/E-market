@@ -11,8 +11,10 @@ import UserAuthPage from '../User/UserAuthToggle/UserAuthPage';
 import AddItem from '../components/Item/AddItem';
 import AboutUs from '../components/NavComponents/About';
 import Contact from '../components/NavComponents/Contact';
+import VerifyOtp from '../User/ResetPassword/VerifyOtp';
+import UserForgotPasswordPage from '../User/ResetPassword/UserForgotPage';
 
-const AppRoutes = ({error, showNotification, fetchItems, addItemInCart,fetchedItems, updateLoggedInUser, loggedInHandler, isLoggedUser }) => {
+const AppRoutes = () => {
     return (
         <Routes>
             <Route path="/" element={<Home/>} />
@@ -26,6 +28,8 @@ const AppRoutes = ({error, showNotification, fetchItems, addItemInCart,fetchedIt
             <Route path='/addItem' element={<AddItem />}/>
             <Route path='/About' element={<AboutUs/>}/>
             <Route path='/contact' element={<Contact/>}/>
+            <Route path='/forgotpassword' element={<UserForgotPasswordPage/>}></Route>
+            <Route path='verify-otp' element={<VerifyOtp/>}/>
         </Routes>
     );
 };

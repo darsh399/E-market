@@ -1,0 +1,74 @@
+
+.otp-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f6f8;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.otp-form {
+  background-color: #fff;
+  padding: 35px 25px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+.otp-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #333;
+  font-size: 1.6rem;
+}
+
+.otp-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.otp-form input:focus {
+  border-color: #007bff;
+}
+
+.error-message {
+  color: #e53935;
+  background: #ffeaea;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.otp-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.otp-form button:hover {
+  background-color: #0056b3;
+}
+
+.otp-form button:disabled {
+  background-color: #90caf9;
+  cursor: not-allowed;
+}

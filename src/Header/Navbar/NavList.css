@@ -1,46 +1,69 @@
-ul {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: #007bff; 
-    list-style: none;
-    padding: 7px;
-    margin: 0;
-    gap: 1rem;
+.nav-list {
+  display: flex;
+  justify-content: center;
+  background-color: #007bff;
+  list-style: none;
+  padding: 10px 0;
+  margin-top: 10px;
+  gap: 1.25rem;
+  border-radius: 6px;
+  user-select: none;
+}
+
+.nav-list li {
+  position: relative;
+}
+
+.nav-list li a {
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+  display: inline-block;
+}
+
+.nav-list li a:hover,
+.nav-list li a:focus {
+  background-color: #0056b3;
+  transform: scale(1.1);
+}
+
+.nav-select {
+  background-color: #007bff;
+  color: white;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+  user-select: none;
+}
+
+.nav-select:hover,
+.nav-select:focus {
+  background-color: #0056b3;
+  transform: scale(1.1);
+}
+
+.nav-select option {
+  color: #222;
+  font-weight: normal;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-list {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 8px 12px;
   }
-  
-  ul li a {
-    text-decoration: none;
-    color: white;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    transition: background-color 0.2s, transform 0.2s;
-  }
-  
-  ul li a:hover {
-    background-color: #0056b3; 
-    transform: scale(1.05); 
-  }
-  
+
   .nav-select {
-    background-color: #007bff;
-    color: white;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    border: none;
-    font-size: 1rem;
-    transition: background-color 0.2s, transform 0.2s;
-    cursor: pointer;
+    width: 100%;
   }
-  
-  .nav-select:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-  }
-  
-  .nav-select option {
-    color: black; 
-  }
-  
+}
