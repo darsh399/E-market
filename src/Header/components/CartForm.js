@@ -3,7 +3,7 @@ import Logo from '../../common/Logo';
 import Button from '../../common/Button';
 import { useGlobalUiContext } from '../../Context/GlobalUiContextProvider';
 const CartForm = ({ item }) => {
-  const {addItemInCart} = useGlobalUiContext();
+  const { addItemInCart } = useGlobalUiContext();
   const addItemInCarts = (item) => {
     addItemInCart(item);
   };

@@ -3,7 +3,8 @@ import Input from "../../common/Input";
 import Button from "../../common/Button";
 import axios from "axios";
 import './VerifyOtp.css';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+
 
 const VerifyOtp = () => {
     const location = useLocation();
@@ -12,7 +13,7 @@ const VerifyOtp = () => {
     const [loading, setLoading] = useState(false);
 
     const email = location.state?.email;
-
+    const navigate = useNavigate();
     const inputhandler = (e) => {
         setOtp(e.target.value);
     }
@@ -22,9 +23,10 @@ const VerifyOtp = () => {
         setError('');
 
         try {
-            const res = await axios.post('http://localhost:5000/api/v1/user/verify-otp',{otp, email});
+            const res = await axios.post('http://localhost:5000/api/v1/user/verify-otp', { email, otp });
             if (res.data.success) {
                 alert(' otp is right');
+                navigate('/update-new-password', { state: { email, otp } });
             } else {
                 setError(res.data.message || 'Wrong OTP Please Enter Valid OTP')
             }

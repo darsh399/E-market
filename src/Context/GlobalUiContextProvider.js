@@ -13,7 +13,7 @@ const GlobalUiContextProvider = ({ children }) => {
     const [fetchedItems, setFetchedItems] = useState([]);
     const [error, setError] = useState(null);
     const [notification, setNotification] = useState({ message: '', type: '' });
-    
+
     const items = itemsInCart.length;
     const clearNotification = () => setNotification({ message: '', type: '' });
 
@@ -22,7 +22,7 @@ const GlobalUiContextProvider = ({ children }) => {
         setTimeout(() => clearNotification(), 3000);
     };
 
-   
+
     const fetchItems = async () => {
         try {
             const res = await axios.get('http://localhost:5000/api/v1/item/allData');
@@ -33,7 +33,29 @@ const GlobalUiContextProvider = ({ children }) => {
         }
     };
 
-    
+    useEffect(() => {
+        const getItemsFromCart = async () => {
+            if (!isLoggedIn) return;
+
+            try {
+                const res = await axios.get(`http://localhost:5000/api/v1/user/get-items/${isLoggedIn._id}`, {
+                    withCredentials: true
+                });
+                if (res.data.success) {
+                    console.log('in getItemsFromCart', res);
+                    setitemsInCart(res.data.cartItems);
+                } else {
+                    showNotification(res.data.message || "Failed to fetch cart", "error");
+                }
+            } catch (err) {
+                console.error("Cart fetch failed:", err);
+            }
+        };
+
+        getItemsFromCart();
+    }, [isLoggedIn]);
+
+
     useEffect(() => {
         fetchItems();
         const checkLoginStatus = async () => {
@@ -50,28 +72,54 @@ const GlobalUiContextProvider = ({ children }) => {
         checkLoginStatus();
     }, []);
 
-    
+
     const removeItemFromCart = (id) => {
         setitemsInCart(prev => prev.filter(item => item._id !== id));
     };
 
-    const addItemInCart = (newData) => {
-        setitemsInCart(prev => {
-            const isDuplicate = prev.some(item => item._id === newData._id);
-            return isDuplicate ? prev : [...prev, newData];
-        });
-        alert('Item added in cart');
-    };
+    const addItemInCart = async (newData) => {
 
-    
+        if (!isLoggedIn) {
+            showNotification("Please log in to add items to cart", "error")
+            return;
+        }
+        const userId = isLoggedIn._id;
+        const productId = newData._id;
+
+        try {
+            const res = await axios.post('http://localhost:5000/api/v1/user/addItem', {
+                userId,
+                productId
+            },
+                {
+                    withCredentials: true
+                });
+
+            if (res.data.success) {
+                setitemsInCart((prev) => {
+                    const isDuplicate = prev.some(item => item._id === newData._id);
+                    return isDuplicate ? prev : [...prev, newData];
+                })
+                showNotification('Item added in cart', 'success');
+            }
+            else {
+                showNotification(res.data.message || "Failed to add item", "error");
+            }
+        } catch (err) {
+            showNotification("Something went wrong", "error");
+            console.error(err);
+        }
+    }
+
+
     const inputHandler = (data) => setInput(data);
     const onClickEventHandler = () => setInput('');
 
-   
+
     const loggedInHandler = (data) => setIsLoggedIn(data);
     const updateLoggedInUser = (updatedUserData) => setIsLoggedIn(updatedUserData);
 
-    
+
     const value = {
         items,
         itemsInCart,

@@ -13,7 +13,7 @@ import AboutUs from '../components/NavComponents/About';
 import Contact from '../components/NavComponents/Contact';
 import VerifyOtp from '../User/ResetPassword/VerifyOtp';
 import UserForgotPasswordPage from '../User/ResetPassword/UserForgotPage';
-
+import NewPassword from '../User/ResetPassword/NewPassword';
 const AppRoutes = () => {
     return (
         <Routes>
@@ -29,9 +29,10 @@ const AppRoutes = () => {
             <Route path='/About' element={<AboutUs/>}/>
             <Route path='/contact' element={<Contact/>}/>
             <Route path='/forgotpassword' element={<UserForgotPasswordPage/>}></Route>
-            <Route path='verify-otp' element={<VerifyOtp/>}/>
+            <Route path='/verify-otp' element={<VerifyOtp/>}/>
+            <Route path='/update-new-password' element={<NewPassword/>}/>
         </Routes>
     );
-};
+}; 
 
 export default AppRoutes;
