@@ -42,11 +42,8 @@ const GlobalUiContextProvider = ({ children }) => {
                     withCredentials: true
                 });
                 if (res.data.success) {
-                    console.log('in getItemsFromCart', res);
                     setitemsInCart(res.data.cartItems);
-                } else {
-                    showNotification(res.data.message || "Failed to fetch cart", "error");
-                }
+                } 
             } catch (err) {
                 console.error("Cart fetch failed:", err);
             }
@@ -98,7 +95,11 @@ const GlobalUiContextProvider = ({ children }) => {
             if (res.data.success) {
                 setitemsInCart((prev) => {
                     const isDuplicate = prev.some(item => item._id === newData._id);
+                    if(isDuplicate){
+                        showNotification('Item already added in cart', 'error')
+                    }
                     return isDuplicate ? prev : [...prev, newData];
+
                 })
                 showNotification('Item added in cart', 'success');
             }

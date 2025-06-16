@@ -12,6 +12,7 @@ import AddItem from '../components/Item/AddItem';
 import AboutUs from '../components/NavComponents/About';
 import Contact from '../components/NavComponents/Contact';
 import VerifyOtp from '../User/ResetPassword/VerifyOtp';
+import SearchResults from '../Header/components/SearchResult';
 import UserForgotPasswordPage from '../User/ResetPassword/UserForgotPage';
 import NewPassword from '../User/ResetPassword/NewPassword';
 const AppRoutes = () => {
@@ -27,6 +28,7 @@ const AppRoutes = () => {
             <Route path='/userUpdate' element={<UserUpdatePage />} />
             <Route path='/addItem' element={<AddItem />}/>
             <Route path='/About' element={<AboutUs/>}/>
+            <Route path="/search-results" element={<SearchResults />} />
             <Route path='/contact' element={<Contact/>}/>
             <Route path='/forgotpassword' element={<UserForgotPasswordPage/>}></Route>
             <Route path='/verify-otp' element={<VerifyOtp/>}/>
