@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import CartForm from "./CartForm";
 import './SearchResult.css';
-
+import { useGlobalUiContext } from "../../Context/GlobalUiContextProvider";
 const SearchResults = () => {
-  const [filteredData, setFilteredData] = useState([]);
-
- useEffect(() => {
-  const results = JSON.parse(sessionStorage.getItem("filteredResults")) || [];
-  setFilteredData(results);
-  sessionStorage.removeItem("filteredResults");
-}, []);
+  const {filteredData} = useGlobalUiContext();
+ 
 
 
+console.log('filteredData', filteredData);
   return (
     <div className="search-results-page">
       <h2>Search Results</h2>

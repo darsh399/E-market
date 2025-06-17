@@ -3,33 +3,22 @@ import './Input.css';
 import Input from '../../common/Input';
 import Button from '../../common/Button';
 import { useUiContext } from '../../Context/UiProvider';
+import { useNavigate } from 'react-router-dom'; 
 import { useGlobalUiContext } from '../../Context/GlobalUiContextProvider';
-import { useNavigate } from 'react-router-dom'; // 👈 for redirecting to results
-
 const InputSearch = () => {
   const [userInputData, setUserInputData] = useState("");
   const { toggleInputVisibility } = useUiContext();
-  const { fetchedItems } = useGlobalUiContext();
+  const {getFilteredData} = useGlobalUiContext();
+  
   const navigate = useNavigate(); 
-
+  
   const inputHandler = (text) => {
     setUserInputData(text);
   };
 
-  const handleSearch = () => {
-    if (!fetchedItems || !Array.isArray(fetchedItems)) return;
-
-    const searchValue = userInputData.toLowerCase();
-
-    const results = fetchedItems.filter(item =>
-      item.productName?.toLowerCase().includes(searchValue) ||
-      item.productCategory?.toLowerCase().includes(searchValue) ||
-      item.productDescription?.toLowerCase().includes(searchValue)
-    );
-
-    sessionStorage.setItem("filteredResults", JSON.stringify(results));
-
-    toggleInputVisibility(false); 
+  const handleSearch =async () => {
+    const userEnteredData = userInputData.toLowerCase();
+    getFilteredData(userEnteredData);
     navigate("/search-results"); 
   };
 

@@ -13,7 +13,8 @@ const GlobalUiContextProvider = ({ children }) => {
     const [fetchedItems, setFetchedItems] = useState([]);
     const [error, setError] = useState(null);
     const [notification, setNotification] = useState({ message: '', type: '' });
-
+    const [filteredData, setFilteredData] = useState([]);
+   
     const items = itemsInCart.length;
     const clearNotification = () => setNotification({ message: '', type: '' });
 
@@ -32,6 +33,15 @@ const GlobalUiContextProvider = ({ children }) => {
             console.error(err);
         }
     };
+
+    const getFilteredData = async (searchValue) => {
+        const data = await  fetchedItems.filter(item =>
+      item.productName?.toLowerCase().includes(searchValue) ||
+      item.productCateogery?.toLowerCase().includes(searchValue) ||
+      item.productDescription?.toLowerCase().includes(searchValue)
+    );
+    return setFilteredData(data);
+    }
 
     useEffect(() => {
         const getItemsFromCart = async () => {
@@ -142,7 +152,9 @@ const GlobalUiContextProvider = ({ children }) => {
         removeItemFromCart,
         addItemInCart,
         loggedInHandler,
-        updateLoggedInUser
+        updateLoggedInUser,
+        getFilteredData,
+        filteredData
     };
 
     return (
