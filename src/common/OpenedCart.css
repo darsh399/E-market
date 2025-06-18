@@ -1,0 +1,140 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 850px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.close-button {
+  position: absolute;
+  top: 0.8rem;
+  right: 1rem;
+  font-size: 1.8rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s ease-in-out;
+}
+
+.close-button:hover {
+  color: #000;
+}
+
+.opened-cart-container {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.opened-cart-image {
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.opened-cart-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.opened-cart-details h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.opened-cart-details p {
+  font-size: 1rem;
+  margin: 0.3rem 0;
+  color: #555;
+}
+
+.opened-cart-details p strong {
+  font-size: 1.4rem;
+  color: #000;
+}
+
+.opened-cart-buttons {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn.buy {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn.buy:hover {
+  background-color: #0056b3;
+}
+
+.btn.cart {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn.cart:hover {
+  background-color: #1e7e34;
+}
+
+@media (max-width: 768px) {
+  .opened-cart-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .opened-cart-image {
+    width: 90%;
+  }
+
+  .opened-cart-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}

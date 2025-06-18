@@ -14,9 +14,14 @@ const GlobalUiContextProvider = ({ children }) => {
     const [error, setError] = useState(null);
     const [notification, setNotification] = useState({ message: '', type: '' });
     const [filteredData, setFilteredData] = useState([]);
-   
+    const [openedCart, setOpenedCart] = useState();
+
     const items = itemsInCart.length;
     const clearNotification = () => setNotification({ message: '', type: '' });
+   
+    const openedCartHandler = (cartIem) => {
+          setOpenedCart(cartIem);
+    }
 
     const showNotification = (message, type) => {
         setNotification({ message, type });
@@ -154,7 +159,9 @@ const GlobalUiContextProvider = ({ children }) => {
         loggedInHandler,
         updateLoggedInUser,
         getFilteredData,
-        filteredData
+        filteredData,
+        openedCartHandler,
+        openedCart
     };
 
     return (

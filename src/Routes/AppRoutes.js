@@ -15,6 +15,7 @@ import VerifyOtp from '../User/ResetPassword/VerifyOtp';
 import SearchResults from '../Header/components/SearchResult';
 import UserForgotPasswordPage from '../User/ResetPassword/UserForgotPage';
 import NewPassword from '../User/ResetPassword/NewPassword';
+import OpenedCart from '../common/OpenedCart';
 const AppRoutes = () => {
     return (
         <Routes>
@@ -33,6 +34,7 @@ const AppRoutes = () => {
             <Route path='/forgotpassword' element={<UserForgotPasswordPage/>}></Route>
             <Route path='/verify-otp' element={<VerifyOtp/>}/>
             <Route path='/update-new-password' element={<NewPassword/>}/>
+            <Route path="/opened-cart" element={<OpenedCart />} />
         </Routes>
     );
 }; 
