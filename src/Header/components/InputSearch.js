@@ -34,7 +34,7 @@ const InputSearch = () => {
         />
         <span className="close-btn" onClick={() => toggleInputVisibility(false)}>×</span>
       </div>
-
+       
       <Button size="medium" type="primary" onClick={handleSearch}>
         SEARCH
       </Button>

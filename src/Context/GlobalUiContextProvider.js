@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext, useEffect } from "react";
+import { useState, useContext, createContext, useEffect } from "react";
 import axios from "axios";
 
 const GlobalUiContext = createContext();
@@ -15,14 +15,14 @@ const GlobalUiContextProvider = ({ children }) => {
     const [notification, setNotification] = useState({ message: '', type: '' });
     const [filteredData, setFilteredData] = useState([]);
     const [openedCart, setOpenedCart] = useState();
-
+    
     const items = itemsInCart.length;
     const clearNotification = () => setNotification({ message: '', type: '' });
    
     const openedCartHandler = (cartIem) => {
           setOpenedCart(cartIem);
     }
-
+ 
     const showNotification = (message, type) => {
         setNotification({ message, type });
         setTimeout(() => clearNotification(), 3000);
@@ -40,7 +40,7 @@ const GlobalUiContextProvider = ({ children }) => {
     };
 
     const getFilteredData = async (searchValue) => {
-        const data = await  fetchedItems.filter(item =>
+        const data = await fetchedItems.filter(item =>
       item.productName?.toLowerCase().includes(searchValue) ||
       item.productCateogery?.toLowerCase().includes(searchValue) ||
       item.productDescription?.toLowerCase().includes(searchValue)

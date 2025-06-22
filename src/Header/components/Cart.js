@@ -2,7 +2,9 @@ import './Cart.css';
 import Button from '../../common/Button';
 import { useUiContext } from '../../Context/UiProvider';
 import { useGlobalUiContext } from '../../Context/GlobalUiContextProvider';
+
 const Cart = () => {
+   
     const {itemsInCart, removeItemFromCart} = useGlobalUiContext();
     const {toggleCartVisibility} = useUiContext();
     return (

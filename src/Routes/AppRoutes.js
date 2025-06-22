@@ -16,6 +16,7 @@ import SearchResults from '../Header/components/SearchResult';
 import UserForgotPasswordPage from '../User/ResetPassword/UserForgotPage';
 import NewPassword from '../User/ResetPassword/NewPassword';
 import OpenedCart from '../common/OpenedCart';
+import DeleteUser from '../User/DeleteUser';
 const AppRoutes = () => {
     return (
         <Routes>
@@ -31,6 +32,7 @@ const AppRoutes = () => {
             <Route path='/About' element={<AboutUs/>}/>
             <Route path="/search-results" element={<SearchResults />} />
             <Route path='/contact' element={<Contact/>}/>
+            <Route path='/delete-user' element={<DeleteUser/>}/>
             <Route path='/forgotpassword' element={<UserForgotPasswordPage/>}></Route>
             <Route path='/verify-otp' element={<VerifyOtp/>}/>
             <Route path='/update-new-password' element={<NewPassword/>}/>

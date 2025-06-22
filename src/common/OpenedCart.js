@@ -1,9 +1,10 @@
 import { useGlobalUiContext } from "../Context/GlobalUiContextProvider";
 import './OpenedCart.css';
+import { useNavigate } from "react-router-dom";
 
 const OpenedCart = ({ onClose }) => {
-  const { openedCart, addItemInCart } = useGlobalUiContext();
-
+  const { openedCart, addItemInCart, openedCartHandler } = useGlobalUiContext();
+  const navigate = useNavigate();
   if (!openedCart) return null;
 
   const handleBuyNow = () => {
@@ -14,10 +15,16 @@ const OpenedCart = ({ onClose }) => {
     addItemInCart(openedCart);
   };
 
+   const closeCarthandler = () =>{
+    openedCartHandler(null);
+     navigate(-1);
+  }
+
+
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className="modal-overlay" onClick={closeCarthandler}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="close-button" onClick={onClose}>×</button>
+        <button className="close-button" onClick={closeCarthandler} >×</button>
         <div className="opened-cart-container">
           <div>
             <img

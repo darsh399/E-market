@@ -1,8 +1,8 @@
 import CartForm from "../Header/components/CartForm";
+import { useGlobalUiContext } from "../Context/GlobalUiContextProvider";
 
-
-const ItemList = ({ addItemInCart, fetchedItems, error }) => {
- 
+const ItemList = () => {
+ const { addItemInCart, fetchedItems, error } = useGlobalUiContext(); 
 
   return (
     <div className="cart-container">

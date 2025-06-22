@@ -16,6 +16,7 @@ const CartForm = ({ item }) => {
     addItemInCart(item);
   };
 
+
   return (
     <div className="cart-card" onClick={() => openCart(item)}>
       <Logo img={`http://localhost:5000/uploads/${item.productImage}`} alt={item.productName} size="200px" />
