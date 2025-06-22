@@ -1,11 +1,13 @@
 import './ProfileDropdown.css';
 import Button from '../../common/Button';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { useUiContext } from '../../Context/UiProvider';
 import { useGlobalUiContext } from '../../Context/GlobalUiContextProvider';
 const ProfileDropdown = () => {
     const {toggleProfileMenuVisibility} = useUiContext();
-    const {isLoggedIn, setIsLoggedIn, showNotification} = useGlobalUiContext();
+    const {isLoggedIn, setIsLoggedIn, setitemsInCart, showNotification} = useGlobalUiContext();
+    const navigate = useNavigate();
     const handleLogout = async () => {
         try {
             await axios.post('http://localhost:5000/api/v1/user/logout', {}, {
@@ -13,6 +15,8 @@ const ProfileDropdown = () => {
             });
 
             setIsLoggedIn(null);
+            setitemsInCart([]);
+            navigate('/');
             showNotification('Logged out successfully', 'success');
             toggleProfileMenuVisibility(false);
 

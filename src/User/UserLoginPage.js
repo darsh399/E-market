@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useGlobalUiContext } from '../Context/GlobalUiContextProvider';
 
 const UserLoginPage = () => {
-  const { loggedInHandler, showNotification } = useGlobalUiContext();
+  const { loginUserHandler, showNotification } = useGlobalUiContext();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -32,7 +32,7 @@ const UserLoginPage = () => {
       });
 
       showNotification(`Welcome back ${res.data.user.name}`, 'success');
-      loggedInHandler(res.data.user);
+      await loginUserHandler(res.data.user);
       navigate('/');
 
       setFormData({ email: '', password: '' });
@@ -40,6 +40,7 @@ const UserLoginPage = () => {
       showNotification(error.response?.data?.message || "Login failed", 'error');
     }
   };
+
 
   return (
     <form className="login-container" onSubmit={formHandler} noValidate>
@@ -86,3 +87,6 @@ const UserLoginPage = () => {
 };
 
 export default UserLoginPage;
+
+
+

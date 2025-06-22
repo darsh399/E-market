@@ -15,19 +15,17 @@ const GlobalUiContextProvider = ({ children }) => {
     const [notification, setNotification] = useState({ message: '', type: '' });
     const [filteredData, setFilteredData] = useState([]);
     const [openedCart, setOpenedCart] = useState();
-    
-    const items = itemsInCart.length;
+
     const clearNotification = () => setNotification({ message: '', type: '' });
-   
+
     const openedCartHandler = (cartIem) => {
-          setOpenedCart(cartIem);
+        setOpenedCart(cartIem);
     }
- 
+
     const showNotification = (message, type) => {
         setNotification({ message, type });
         setTimeout(() => clearNotification(), 3000);
     };
-
 
     const fetchItems = async () => {
         try {
@@ -41,32 +39,30 @@ const GlobalUiContextProvider = ({ children }) => {
 
     const getFilteredData = async (searchValue) => {
         const data = await fetchedItems.filter(item =>
-      item.productName?.toLowerCase().includes(searchValue) ||
-      item.productCateogery?.toLowerCase().includes(searchValue) ||
-      item.productDescription?.toLowerCase().includes(searchValue)
-    );
-    return setFilteredData(data);
-    }
+            item.productName?.toLowerCase().includes(searchValue) ||
+            item.productCateogery?.toLowerCase().includes(searchValue) ||
+            item.productDescription?.toLowerCase().includes(searchValue)
+        );
+        return setFilteredData(data);
+    };
 
-    useEffect(() => {
-        const getItemsFromCart = async () => {
-            if (!isLoggedIn) return;
-
-            try {
-                const res = await axios.get(`http://localhost:5000/api/v1/user/get-items/${isLoggedIn._id}`, {
-                    withCredentials: true
-                });
-                if (res.data.success) {
-                    setitemsInCart(res.data.cartItems);
-                } 
-            } catch (err) {
-                console.error("Cart fetch failed:", err);
+    const fetchCartItems = async (userId) => {
+        try {
+            const res = await axios.get(`http://localhost:5000/api/v1/user/get-items/${userId}`, {
+                withCredentials: true
+            });
+            if (res.data.success) {
+                setitemsInCart(res.data.cartItems);
             }
-        };
+        } catch (err) {
+            console.error("Cart fetch failed:", err);
+        }
+    };
 
-        getItemsFromCart();
-    }, [isLoggedIn]);
-
+    const loginUserHandler = async (user) => {
+        setIsLoggedIn(user);
+        await fetchCartItems(user._id);
+    };
 
     useEffect(() => {
         fetchItems();
@@ -76,25 +72,24 @@ const GlobalUiContextProvider = ({ children }) => {
                     withCredentials: true
                 });
                 setIsLoggedIn(res.data.user);
+                await fetchCartItems(res.data.user._id);
             } catch (err) {
                 console.log("Not logged in:", err.response?.data?.message || err.message);
             }
         };
-
         checkLoginStatus();
     }, []);
-
 
     const removeItemFromCart = (id) => {
         setitemsInCart(prev => prev.filter(item => item._id !== id));
     };
 
     const addItemInCart = async (newData) => {
-
         if (!isLoggedIn) {
-            showNotification("Please log in to add items to cart", "error")
+            showNotification("Please log in to add items to cart", "error");
             return;
         }
+
         const userId = isLoggedIn._id;
         const productId = newData._id;
 
@@ -102,42 +97,36 @@ const GlobalUiContextProvider = ({ children }) => {
             const res = await axios.post('http://localhost:5000/api/v1/user/addItem', {
                 userId,
                 productId
-            },
-                {
-                    withCredentials: true
-                });
+            }, {
+                withCredentials: true
+            });
 
             if (res.data.success) {
                 setitemsInCart((prev) => {
                     const isDuplicate = prev.some(item => item._id === newData._id);
-                    if(isDuplicate){
-                        showNotification('Item already added in cart', 'error')
+                    if (isDuplicate) {
+                        showNotification('Item already added in cart', 'error');
                     }
                     return isDuplicate ? prev : [...prev, newData];
-
-                })
+                });
                 showNotification('Item added in cart', 'success');
-            }
-            else {
+            } else {
                 showNotification(res.data.message || "Failed to add item", "error");
             }
         } catch (err) {
             showNotification("Something went wrong", "error");
             console.error(err);
         }
-    }
-
+    };
 
     const inputHandler = (data) => setInput(data);
     const onClickEventHandler = () => setInput('');
 
-
     const loggedInHandler = (data) => setIsLoggedIn(data);
     const updateLoggedInUser = (updatedUserData) => setIsLoggedIn(updatedUserData);
 
-
     const value = {
-        items,
+        items: itemsInCart.length,
         itemsInCart,
         setitemsInCart,
         isLoggedIn,
@@ -161,7 +150,9 @@ const GlobalUiContextProvider = ({ children }) => {
         getFilteredData,
         filteredData,
         openedCartHandler,
-        openedCart
+        openedCart,
+        fetchCartItems,      
+        loginUserHandler     
     };
 
     return (
