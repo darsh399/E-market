@@ -80,9 +80,44 @@ const GlobalUiContextProvider = ({ children }) => {
         checkLoginStatus();
     }, []);
 
-    const removeItemFromCart = (id) => {
-        setitemsInCart(prev => prev.filter(item => item._id !== id));
-    };
+    const clearCart = async(req, res) => {
+        const userId = isLoggedIn._id;
+        try{
+            const res = await axios.post('http://localhost:5000/api/v1/user/remove-all-carts-items', {
+                userId
+            });
+            if(res.data.success){
+                showNotification('Cart clered', 'success');
+            }
+            setitemsInCart([]);
+        }catch(err){
+            console.log("Not logged in:", err.response?.data?.message || err.message); 
+        }
+    }
+
+const removeItemFromCart = async (id) => {
+    const productId = id;
+    const userId = isLoggedIn._id;
+
+    try {
+        const res = await axios.post('http://localhost:5000/api/v1/user/remove-item-from-cart', {
+            userId,
+            productId
+        });
+
+        if (res.data.success) {
+            setitemsInCart(prev => prev.filter(item => item._id !== id));
+            showNotification('Item removed from cart', 'success');
+        } else {
+            showNotification(res.data.message || 'Failed to remove item', 'error');
+        }
+
+    } catch (error) {
+        console.error('Error in removing item from cart:', error);
+        showNotification('Server error while removing item', 'error');
+    }
+};
+
 
     const addItemInCart = async (newData) => {
         if (!isLoggedIn) {
@@ -126,7 +161,7 @@ const GlobalUiContextProvider = ({ children }) => {
     const updateLoggedInUser = (updatedUserData) => setIsLoggedIn(updatedUserData);
 
     const value = {
-        items: itemsInCart.length,
+        items: itemsInCart?.length,
         itemsInCart,
         setitemsInCart,
         isLoggedIn,
@@ -152,7 +187,8 @@ const GlobalUiContextProvider = ({ children }) => {
         openedCartHandler,
         openedCart,
         fetchCartItems,      
-        loginUserHandler     
+        loginUserHandler,
+        clearCart     
     };
 
     return (
@@ -163,3 +199,15 @@ const GlobalUiContextProvider = ({ children }) => {
 };
 
 export default GlobalUiContextProvider;
+
+
+
+
+
+
+
+
+
+
+
+

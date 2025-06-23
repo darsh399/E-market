@@ -39,10 +39,13 @@ const Header = () => {
                 )}
 
                 {isCartVisible && (
-                    <div className="header-cart-popup">
-                        <Cart />
+                    <div className="cart-backdrop">
+                        <div className="header-cart-popup">
+                            <Cart />
+                        </div>
                     </div>
                 )}
+
 
             </div>
             <NavList />
