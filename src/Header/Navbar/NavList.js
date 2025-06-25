@@ -22,7 +22,7 @@ const NavList = () => {
           <option value="/" >Products</option>
           <option value="/mobile">Mobiles</option>
           <option value="/refrigerator">Fridges</option>
-          <option value="/AC">AC</option>
+          <option value="/ac">AC</option>
         </select>
       </li>
 

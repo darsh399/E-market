@@ -1,18 +1,24 @@
-
+import { useRef } from "react";
 import ItemList from "../../Data/ItemList";
 import "./Home.css";
 
 const Home = () => {
+  const itemsRef = useRef(null);
+
+  const handleShopNowClick = () => {
+    itemsRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="home-container">
-
       <section className="hero">
         <h1>Biggest Sale of the Season!</h1>
         <p>Get up to 50% off on all products — only for a limited time.</p>
-        <button className="shop-now-btn">Shop Now</button>
+        <button className="shop-now-btn" onClick={handleShopNowClick}>
+          Shop Now
+        </button>
       </section>
 
-     
       <section className="features">
         <div className="feature-card">
           <h3>🚚 Free Shipping</h3>
@@ -28,12 +34,10 @@ const Home = () => {
         </div>
       </section>
 
-    
-      <section className="items-section">
+      <section className="items-section" ref={itemsRef}>
         <ItemList />
       </section>
 
-  
       <section className="testimonials">
         <h2>What Our Customers Say</h2>
         <div className="testimonial-card">
@@ -52,8 +56,6 @@ const Home = () => {
         <input type="email" placeholder="Enter your email" />
         <button>Subscribe</button>
       </section>
-
-     
     </div>
   );
 };

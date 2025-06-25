@@ -6,9 +6,9 @@ const AcItems = () => {
    return(
     <div className="ac-items-container">
         {
-           fetchedItems.filter((data) => data.productCategory?.toLowerCase() === 'air conditioner')
+           fetchedItems.filter((data) => data.productCateogery?.toLowerCase() === 'air conditioner')
            .map((data) => {
-            return <CartForm key={data.id} item={data}/>
+            return <CartForm key={data._id} item={data}/>
            })
         }
     </div>

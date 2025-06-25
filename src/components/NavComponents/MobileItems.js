@@ -11,7 +11,7 @@ const MobileItems = () => {
                     .filter((data) => data.productCateogery
                     ?.toLowerCase() === "mobile")
                     .map((data) => (
-                        <CartForm key={data._id} item={data} />
+                        <CartForm key={data.id} item={data} />
                     ))
             }
         </div>

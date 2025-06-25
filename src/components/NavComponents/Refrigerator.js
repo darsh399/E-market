@@ -6,9 +6,9 @@ const Refrigerator = () => {
 return(
     <div className='fridge-items-container'>
              {
-                fetchedItems.filter((data) => data.productCategory?.toLowerCase() === 'refrigerator')
+                fetchedItems.filter((data) => data.productCateogery?.toLowerCase() === 'refrigerator')
                 .map((data) => {
-                    return <CartForm key={data.id} item={data}/>
+                    return <CartForm key={data._id} item={data}/>
                 })
              }
     </div>

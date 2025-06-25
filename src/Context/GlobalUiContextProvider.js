@@ -15,7 +15,7 @@ const GlobalUiContextProvider = ({ children }) => {
     const [notification, setNotification] = useState({ message: '', type: '' });
     const [filteredData, setFilteredData] = useState([]);
     const [openedCart, setOpenedCart] = useState();
-
+    const [previousOrders, setPreviousOrders] = useState([]);
     const clearNotification = () => setNotification({ message: '', type: '' });
 
     const openedCartHandler = (cartIem) => {
@@ -59,6 +59,18 @@ const GlobalUiContextProvider = ({ children }) => {
         }
     };
 
+    const fetchPreviousOrders = async (userId) => {
+        try {
+            const res = await axios.post('http://localhost:5000/api/v1/user/get-previous-orders', { userId });
+            if (res.data.success) {
+                await setPreviousOrders(res.data.previousOrders);
+            }
+        } catch (error) {
+            console.error("Failed to fetch previous orders:", error);
+            showNotification("Error fetching previous orders", "error");
+        }
+    };
+
     const loginUserHandler = async (user) => {
         setIsLoggedIn(user);
         await fetchCartItems(user._id);
@@ -72,6 +84,7 @@ const GlobalUiContextProvider = ({ children }) => {
                     withCredentials: true
                 });
                 setIsLoggedIn(res.data.user);
+                await fetchPreviousOrders(res.data.user._id)
                 await fetchCartItems(res.data.user._id);
             } catch (err) {
                 console.log("Not logged in:", err.response?.data?.message || err.message);
@@ -80,43 +93,43 @@ const GlobalUiContextProvider = ({ children }) => {
         checkLoginStatus();
     }, []);
 
-    const clearCart = async(req, res) => {
+    const clearCart = async (req, res) => {
         const userId = isLoggedIn._id;
-        try{
+        try {
             const res = await axios.post('http://localhost:5000/api/v1/user/remove-all-carts-items', {
                 userId
             });
-            if(res.data.success){
+            if (res.data.success) {
                 showNotification('Cart clered', 'success');
             }
             setitemsInCart([]);
-        }catch(err){
-            console.log("Not logged in:", err.response?.data?.message || err.message); 
+        } catch (err) {
+            console.log("Not logged in:", err.response?.data?.message || err.message);
         }
     }
 
-const removeItemFromCart = async (id) => {
-    const productId = id;
-    const userId = isLoggedIn._id;
+    const removeItemFromCart = async (id) => {
+        const productId = id;
+        const userId = isLoggedIn._id;
 
-    try {
-        const res = await axios.post('http://localhost:5000/api/v1/user/remove-item-from-cart', {
-            userId,
-            productId
-        });
+        try {
+            const res = await axios.post('http://localhost:5000/api/v1/user/remove-item-from-cart', {
+                userId,
+                productId
+            });
 
-        if (res.data.success) {
-            setitemsInCart(prev => prev.filter(item => item._id !== id));
-            showNotification('Item removed from cart', 'success');
-        } else {
-            showNotification(res.data.message || 'Failed to remove item', 'error');
+            if (res.data.success) {
+                setitemsInCart(prev => prev.filter(item => item._id !== id));
+                showNotification('Item removed from cart', 'success');
+            } else {
+                showNotification(res.data.message || 'Failed to remove item', 'error');
+            }
+
+        } catch (error) {
+            console.error('Error in removing item from cart:', error);
+            showNotification('Server error while removing item', 'error');
         }
-
-    } catch (error) {
-        console.error('Error in removing item from cart:', error);
-        showNotification('Server error while removing item', 'error');
-    }
-};
+    };
 
 
     const addItemInCart = async (newData) => {
@@ -186,9 +199,11 @@ const removeItemFromCart = async (id) => {
         filteredData,
         openedCartHandler,
         openedCart,
-        fetchCartItems,      
+        fetchCartItems,
         loginUserHandler,
-        clearCart     
+        clearCart,
+        fetchPreviousOrders,
+        previousOrders
     };
 
     return (

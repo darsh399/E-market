@@ -33,7 +33,7 @@ const ProfileDropdown = () => {
                     <Button className="close-button" onClick={() => toggleProfileMenuVisibility(false)}>X</Button>
                     <Button className="link-button">Profile</Button>
                     <Button className="link-button" to='/userUpdate'>Update Profile</Button>
-                    <Button className="link-button">Previous Orders</Button>
+                    <Button className="link-button" to='/orders'>Previous Orders</Button>
                     <Button className="link-button" to='/delete-user'>Delete Account</Button>
                     <Button className="link-button" onClick={handleLogout}>Logout</Button>
                 </>
